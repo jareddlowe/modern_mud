@@ -62,26 +62,26 @@ func _process(delta):
 
 
 func _input(event):
-	var list
-	# Here we 'forget' to add the NearbyItemsGrid list when player is moving
-	# So that the player cannot drop items while moving between locations
+	var slot_list
+	# Here we 'forget' to add the NearbyItemsGrid when player is moving
+	# To prevent the player from dropping items while moving between locations
 	if player.stopped:
-		list = get_node("%InventoryGrid").get_children()
-		list += get_node("%NearbyItemsGrid").get_children()
+		slot_list = get_node("%InventoryGrid").get_children()
+		slot_list += get_node("%NearbyItemsGrid").get_children()
 	else:
-		list = get_node("%InventoryGrid").get_children()
+		slot_list = get_node("%InventoryGrid").get_children()
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 	# Deposit any dragged item into the closest slot
 		if picked_item and !event.pressed:
 			var current_slot
-			for slot in list:
+			for slot in slot_list:
 				if check_if_mouse_above(slot):
 					current_slot = slot
 			if current_slot == null:
 				var closest_slot
 				var last_dist = 10000
-				for slot in list:
+				for slot in slot_list:
 					var dist
 					var mouse_pos = get_global_mouse_position()
 					dist = mouse_pos.distance_to(slot.global_position)
