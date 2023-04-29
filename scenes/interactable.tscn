@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk87gj14f4lgd"]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_ws6nj"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="2_4pwhc"]
 [ext_resource type="Texture2D" uid="uid://bsv6ap7ljexry" path="res://images/vignette-horiz.png" id="2_5mhr0"]
-[ext_resource type="StyleBox" uid="uid://x2c2j2760yn0" path="res://scenes/interactable_normal_green.tres" id="2_eicap"]
-[ext_resource type="StyleBox" uid="uid://dqbg3565jwrpb" path="res://scenes/interactable_hover_green.tres" id="3_myitx"]
+[ext_resource type="StyleBox" uid="uid://x2c2j2760yn0" path="res://resources/interactable_normal_green.tres" id="2_eicap"]
+[ext_resource type="StyleBox" uid="uid://dqbg3565jwrpb" path="res://resources/interactable_hover_green.tres" id="3_myitx"]
 [ext_resource type="FontFile" uid="uid://o10p5etynf6" path="res://fonts/Libre_Franklin/static/LibreFranklin-SemiBold.ttf" id="3_vg7kd"]
-[ext_resource type="StyleBox" uid="uid://r0yhspk77w2a" path="res://scenes/interactable_press_green.tres" id="4_rejr4"]
+[ext_resource type="StyleBox" uid="uid://r0yhspk77w2a" path="res://resources/interactable_press_green.tres" id="4_rejr4"]
 
 [node name="Interactable" type="Button"]
 custom_minimum_size = Vector2(65, 30)
