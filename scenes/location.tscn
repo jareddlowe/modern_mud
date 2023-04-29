@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://enftdojxqdb6"]
+
+[ext_resource type="Script" path="res://scripts/location.gd" id="1_axt3y"]
+[ext_resource type="FontFile" uid="uid://c3i7yokjr1tgc" path="res://fonts/Libre_Franklin/static/LibreFranklin-Regular.ttf" id="2_44ils"]
+
+[node name="Location" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_axt3y")
+metadata/_edit_use_custom_anchors = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 22.0
+offset_bottom = 28.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("2_44ils")
+theme_override_font_sizes/font_size = 11
+text = "Location"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_layout_mode = 1

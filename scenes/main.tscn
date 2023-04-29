@@ -1,0 +1,1837 @@
+[gd_scene load_steps=35 format=3 uid="uid://uaqo0yob036"]
+
+[ext_resource type="PackedScene" uid="uid://b3eogw5bnooqg" path="res://scenes/villagetown.tscn" id="1_7askw"]
+[ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_cm8g5"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_kr3jj"]
+[ext_resource type="Texture2D" uid="uid://bsv6ap7ljexry" path="res://images/vignette-horiz.png" id="2_8rc5h"]
+[ext_resource type="Script" path="res://scripts/MovementLabel.gd" id="2_liwq0"]
+[ext_resource type="Script" path="res://scripts/MessagePanel.gd" id="3_60lpn"]
+[ext_resource type="FontFile" uid="uid://ch54rh77px14x" path="res://fonts/Libre_Franklin/static/LibreFranklin-Medium.ttf" id="4_8od1s"]
+[ext_resource type="Texture2D" uid="uid://cmubxng0teonw" path="res://images/vignette.png" id="4_543l6"]
+[ext_resource type="FontFile" uid="uid://c3i7yokjr1tgc" path="res://fonts/Libre_Franklin/static/LibreFranklin-Regular.ttf" id="9_s1pdl"]
+[ext_resource type="AudioStream" uid="uid://k0ibyy6bptn1" path="res://sounds/click-1.wav" id="10_r7lbd"]
+[ext_resource type="PackedScene" uid="uid://b7m8jvdvtmwrl" path="res://scenes/MenuPanelButton.tscn" id="11_yuoeo"]
+[ext_resource type="PackedScene" uid="uid://bfdgdc4v81nae" path="res://scenes/ItemSlot.tscn" id="12_egasb"]
+[ext_resource type="Script" path="res://scripts/VirtualCursor.gd" id="14_wvm1r"]
+[ext_resource type="PackedScene" uid="uid://cfbjagvrd3t1x" path="res://scenes/Player.tscn" id="15_bfq0e"]
+[ext_resource type="PackedScene" uid="uid://bb3yfk7ryftrc" path="res://scenes/item_name.tscn" id="16_c7aye"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lp5fs"]
+bg_color = Color(0.105882, 0.109804, 0.121569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmahk"]
+bg_color = Color(0.113725, 0.121569, 0.133333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnc8n"]
+bg_color = Color(0.160784, 0.168627, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1sl0"]
+bg_color = Color(0.184314, 0.192157, 0.211765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn1op"]
+bg_color = Color(0.14902, 0.156863, 0.172549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdbm8"]
+bg_color = Color(0.160784, 0.168627, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rus3e"]
+bg_color = Color(0.14902, 0.156863, 0.172549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5405"]
+bg_color = Color(0.160784, 0.168627, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_850bu"]
+bg_color = Color(0.0835597, 0.0876357, 0.09375, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x62mr"]
+bg_color = Color(0.145098, 0.152941, 0.168627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnhg7"]
+bg_color = Color(0.180392, 0.188235, 0.211765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tdaf"]
+bg_color = Color(0.172549, 0.180392, 0.207843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhwly"]
+bg_color = Color(0.129412, 0.137255, 0.152941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x1b3x"]
+bg_color = Color(0, 0, 0, 0.337255)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgpqa"]
+bg_color = Color(0.113725, 0.121569, 0.133333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4v8t"]
+bg_color = Color(0.160784, 0.168627, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_23kym"]
+bg_color = Color(0.121948, 0.130981, 0.144531, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfbvu"]
+bg_color = Color(0.160784, 0.168627, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_700in"]
+bg_color = Color(0.113725, 0.121569, 0.133333, 1)
+
+[node name="Main" type="PanelContainer"]
+process_priority = -1
+use_parent_material = true
+custom_minimum_size = Vector2(886, 800)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_lp5fs")
+script = ExtResource("1_kr3jj")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.207843)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_543l6")
+expand_mode = 1
+
+[node name="GamePanel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(886, 800)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nmahk")
+
+[node name="MarginContainer" type="MarginContainer" parent="GamePanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GamePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="MessagePanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 254)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wnc8n")
+script = ExtResource("3_60lpn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/MessagePanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="MessagePanelTitle" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/MessagePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1sl0")
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/MessagePanel/VBoxContainer/MessagePanelTitle"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.14902, 0.14902, 0.14902, 0.815686)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("1_cm8g5")
+theme_override_font_sizes/font_size = 14
+text = "   Message Log"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/MessagePanel/VBoxContainer/MessagePanelTitle"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="MessagePanelBody" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/MessagePanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bn1op")
+
+[node name="MarginContainer" type="MarginContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/MessagePanel/VBoxContainer/MessagePanelBody"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="MessageScrollContainer" type="ScrollContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/MessagePanel/VBoxContainer/MessagePanelBody/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/MessagePanel/VBoxContainer/MessagePanelBody/MarginContainer/MessageScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/MessagePanel/VBoxContainer/MessagePanelBody"]
+modulate = Color(1, 1, 1, 0.1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_543l6")
+expand_mode = 1
+
+[node name="ChatPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2"]
+visible = false
+custom_minimum_size = Vector2(0, 254)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wnc8n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/ChatPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="MessagePanelTitle" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/ChatPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1sl0")
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/ChatPanel/VBoxContainer/MessagePanelTitle"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.14902, 0.14902, 0.14902, 0.815686)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("1_cm8g5")
+theme_override_font_sizes/font_size = 14
+text = "   Chat"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/ChatPanel/VBoxContainer/MessagePanelTitle"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="MessagePanelBody" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/ChatPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bn1op")
+
+[node name="MarginContainer" type="MarginContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/ChatPanel/VBoxContainer/MessagePanelBody"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="MessageScrollContainer" type="ScrollContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/ChatPanel/VBoxContainer/MessagePanelBody/MarginContainer"]
+layout_mode = 2
+mouse_filter = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/ChatPanel/VBoxContainer/MessagePanelBody/MarginContainer/MessageScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/ChatPanel/VBoxContainer/MessagePanelBody"]
+modulate = Color(1, 1, 1, 0.1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_543l6")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="InteractPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+process_priority = -6
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kdbm8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/InteractPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="InteractPanelTitle" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/InteractPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1sl0")
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/InteractPanel/VBoxContainer/InteractPanelTitle"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.145098, 0.145098, 0.145098, 0.784314)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("1_cm8g5")
+theme_override_font_sizes/font_size = 14
+text = "   Events"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/InteractPanel/VBoxContainer/InteractPanelTitle"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="InteractPanelBody" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/InteractPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rus3e")
+
+[node name="TextureRect2" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/InteractPanel/VBoxContainer/InteractPanelBody"]
+modulate = Color(1, 1, 1, 0.113725)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_543l6")
+expand_mode = 1
+
+[node name="InteractPanelMargin" type="MarginContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/InteractPanel/VBoxContainer/InteractPanelBody"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="MapPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 265)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b5405")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="MapPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1sl0")
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/MapPanel"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.117647, 0.117647, 0.117647, 0.952941)
+theme_override_fonts/font = ExtResource("1_cm8g5")
+theme_override_font_sizes/font_size = 14
+text = "   Map"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/MapPanel"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="ViewportPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_850bu")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/ViewportPanel"]
+clip_contents = true
+layout_mode = 2
+mouse_filter = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/ViewportPanel/SubViewportContainer"]
+unique_name_in_owner = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+size = Vector2i(2, 2)
+render_target_update_mode = 4
+
+[node name="Background" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/ViewportPanel/SubViewportContainer/SubViewport"]
+visible = false
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 1500.0
+offset_bottom = 1500.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+color = Color(0.0820313, 0.0820313, 0.0820313, 1)
+
+[node name="Villagetown" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/ViewportPanel/SubViewportContainer/SubViewport" instance=ExtResource("1_7askw")]
+process_priority = -1
+
+[node name="Player" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/ViewportPanel/SubViewportContainer/SubViewport" instance=ExtResource("15_bfq0e")]
+unique_name_in_owner = true
+process_priority = 1
+offset_right = 600.0
+offset_bottom = 800.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/ViewportPanel"]
+modulate = Color(1, 1, 1, 0.223529)
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_543l6")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/ViewportPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 2
+
+[node name="MovementLabel" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/ViewportPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.827451, 0.827451, 0.827451, 1)
+theme_override_colors/font_shadow_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("4_8od1s")
+theme_override_font_sizes/font_size = 20
+text = " > > > "
+script = ExtResource("2_liwq0")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EntityPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
+process_priority = -6
+custom_minimum_size = Vector2(300, 240)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kdbm8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/EntityPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="EntityPanelTitle" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/EntityPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1sl0")
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/EntityPanel/VBoxContainer/EntityPanelTitle"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.145098, 0.145098, 0.145098, 0.784314)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("1_cm8g5")
+theme_override_font_sizes/font_size = 14
+text = "   Nearby Entities"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/EntityPanel/VBoxContainer/EntityPanelTitle"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="EntityPanelBody" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/EntityPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rus3e")
+
+[node name="InteractPanelMargin" type="MarginContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/EntityPanel/VBoxContainer/EntityPanelBody"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="EntityPanelHFlow" type="HFlowContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/EntityPanel/VBoxContainer/EntityPanelBody/InteractPanelMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/EntityPanel/VBoxContainer/EntityPanelBody"]
+modulate = Color(1, 1, 1, 0.113725)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_543l6")
+expand_mode = 1
+
+[node name="NearbyItemsPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+process_priority = -6
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kdbm8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="NearbyItemsPanelTitle" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1sl0")
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelTitle"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.145098, 0.145098, 0.145098, 0.784314)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("1_cm8g5")
+theme_override_font_sizes/font_size = 14
+text = "   Nearby Items"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelTitle"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="NearbyItemsPanelBody" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x62mr")
+
+[node name="MarginContainer" type="MarginContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="NearbyItemsGrid" type="GridContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 5
+
+[node name="ItemSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot2" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot3" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot4" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot5" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot6" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot7" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot8" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot9" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot10" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot11" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot12" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot13" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot14" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot15" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot16" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot17" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot18" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot19" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="ItemSlot20" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody/MarginContainer/NearbyItemsGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnhg7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0tdaf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yhwly")
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody"]
+modulate = Color(1, 1, 1, 0.113725)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_543l6")
+expand_mode = 1
+
+[node name="DisabledVisual" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x1b3x")
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="InteractPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1"]
+process_priority = -6
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kdbm8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="InteractPanelTitle" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1sl0")
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/InteractPanelTitle"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.145098, 0.145098, 0.145098, 0.784314)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("1_cm8g5")
+theme_override_font_sizes/font_size = 14
+text = "   Quick Actions"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/InteractPanelTitle"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="InteractPanelBody" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rus3e")
+
+[node name="InteractPanelMargin" type="MarginContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/InteractPanelBody"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/InteractPanelBody"]
+modulate = Color(1, 1, 1, 0.113725)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_543l6")
+expand_mode = 1
+
+[node name="MenuPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_850bu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="MenuNavigatePanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lgpqa")
+
+[node name="ButtonHBoxContainer" type="HBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="ActionsButton" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel/ButtonHBoxContainer" instance=ExtResource("11_yuoeo")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+button_name = "Actions"
+
+[node name="GearButton" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel/ButtonHBoxContainer" instance=ExtResource("11_yuoeo")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+button_name = "Gear"
+
+[node name="ItemsButton" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel/ButtonHBoxContainer" instance=ExtResource("11_yuoeo")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+button_name = "Items"
+
+[node name="SkillsButton" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel/ButtonHBoxContainer" instance=ExtResource("11_yuoeo")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+button_name = "Skills"
+
+[node name="QuestsButton" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel/ButtonHBoxContainer" instance=ExtResource("11_yuoeo")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+button_name = "Quests"
+
+[node name="InventoryPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r4v8t")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="InventoryPanelTitle" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1sl0")
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelTitle"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.141176, 0.141176, 0.141176, 1)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("1_cm8g5")
+theme_override_font_sizes/font_size = 14
+text = "   Carried Items"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelTitle"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="InventoryPanelBody" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_23kym")
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody"]
+modulate = Color(1, 1, 1, 0.113725)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_543l6")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="InventoryGrid" type="GridContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+columns = 4
+
+[node name="ItemSlot1" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot2" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot3" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot4" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot5" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot6" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot7" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot8" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot9" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot10" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot11" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot12" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot13" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot14" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot15" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot16" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot17" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot18" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot19" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot20" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot21" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot22" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot23" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot24" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot25" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot26" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot27" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot28" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot29" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot30" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot31" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="ItemSlot32" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
+layout_mode = 2
+
+[node name="SkillsPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_tfbvu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SkillsPanelTitle" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1sl0")
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/SkillsPanelTitle"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.141176, 0.141176, 0.141176, 1)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("1_cm8g5")
+theme_override_font_sizes/font_size = 14
+text = "   Skills"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/SkillsPanelTitle"]
+layout_mode = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_700in")
+
+[node name="MarginContainer" type="MarginContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 2
+
+[node name="SkillsPanelBody" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_23kym")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="1" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Finesse"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="2" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Strength"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="3" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Toughness"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/3"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -10.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+vertical_alignment = 1
+
+[node name="4" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Faith"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="5" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Focus"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/5"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -10.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+vertical_alignment = 1
+
+[node name="6" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Woodcutting"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/6"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -10.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+vertical_alignment = 1
+
+[node name="7" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Farming"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/7"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -10.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+vertical_alignment = 1
+
+[node name="8" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Mining"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="9" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Butchering"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="10" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Hunting"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="11" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Smithing"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="12" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Tailoring"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="13" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/13"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/13"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Leatherworking"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/13"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="14" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/14"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/14"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Cooking"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/14"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="15" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/15"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/15"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Jewelry Making"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/15"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="16" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/16"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/16"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Potion Making"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/16"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="17" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/17"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/17"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Healing Magic"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/17"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="18" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/18"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/18"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Arcane Magic"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/18"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="19" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+color = Color(0.133333, 0.141176, 0.160784, 1)
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/19"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/19"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "   Summoning Magic"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody/ScrollContainer/VBoxContainer/19"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "1 / 99   "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/SkillsPanel/VBoxContainer/PanelContainer/MarginContainer/SkillsPanelBody"]
+modulate = Color(1, 1, 1, 0.113725)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_543l6")
+expand_mode = 1
+
+[node name="VirtualCursor" type="Control" parent="."]
+process_priority = -6
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 1
+script = ExtResource("14_wvm1r")
+
+[node name="ItemNameLabel" parent="VirtualCursor" instance=ExtResource("16_c7aye")]
+layout_mode = 1
+
+[node name="Clicker" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_r7lbd")
+volume_db = -11.267
+pitch_scale = 1.55
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel/ButtonHBoxContainer/ActionsButton" to="." method="_on_actions_button_pressed"]

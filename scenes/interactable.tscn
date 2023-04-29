@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://bk87gj14f4lgd"]
+
+[ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_ws6nj"]
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="2_4pwhc"]
+[ext_resource type="Texture2D" uid="uid://bsv6ap7ljexry" path="res://images/vignette-horiz.png" id="2_5mhr0"]
+[ext_resource type="StyleBox" uid="uid://x2c2j2760yn0" path="res://scenes/interactable_normal_green.tres" id="2_eicap"]
+[ext_resource type="StyleBox" uid="uid://dqbg3565jwrpb" path="res://scenes/interactable_hover_green.tres" id="3_myitx"]
+[ext_resource type="FontFile" uid="uid://o10p5etynf6" path="res://fonts/Libre_Franklin/static/LibreFranklin-SemiBold.ttf" id="3_vg7kd"]
+[ext_resource type="StyleBox" uid="uid://r0yhspk77w2a" path="res://scenes/interactable_press_green.tres" id="4_rejr4"]
+
+[node name="Interactable" type="Button"]
+custom_minimum_size = Vector2(65, 30)
+offset_right = 65.0
+offset_bottom = 30.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_ws6nj")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_eicap")
+theme_override_styles/hover = ExtResource("3_myitx")
+theme_override_styles/pressed = ExtResource("4_rejr4")
+script = ExtResource("2_4pwhc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.823529)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5mhr0")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.498039)
+theme_override_fonts/font = ExtResource("3_vg7kd")
+theme_override_font_sizes/font_size = 10
+text = "Tutor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_interactable_pressed"]

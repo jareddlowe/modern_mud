@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7m8jvdvtmwrl"]
+
+[ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_v0csl"]
+[ext_resource type="Script" path="res://scripts/MenuPanelButton.gd" id="2_3m2uu"]
+[ext_resource type="Texture2D" uid="uid://bsv6ap7ljexry" path="res://images/vignette-horiz.png" id="3_liow1"]
+[ext_resource type="FontFile" uid="uid://c3i7yokjr1tgc" path="res://fonts/Libre_Franklin/static/LibreFranklin-Regular.ttf" id="4_g3m34"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yk5fe"]
+bg_color = Color(0.192157, 0.207843, 0.231373, 1)
+border_width_bottom = 4
+border_color = Color(0.160784, 0.168627, 0.184314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adhro"]
+bg_color = Color(0.258824, 0.270588, 0.301961, 1)
+border_width_bottom = 4
+border_color = Color(0.192157, 0.2, 0.223529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gi5rj"]
+bg_color = Color(0.141176, 0.156863, 0.172549, 1)
+border_color = Color(0.12549, 0.141176, 0.160784, 1)
+
+[node name="MenuPanelButton" type="Button"]
+custom_minimum_size = Vector2i(50, 50)
+offset_right = 50.0
+offset_bottom = 50.0
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_v0csl")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_yk5fe")
+theme_override_styles/hover = SubResource("StyleBoxFlat_adhro")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gi5rj")
+script = ExtResource("2_3m2uu")
+button_name = ""
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.823529)
+custom_minimum_size = Vector2i(50, 50)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_liow1")
+ignore_texture_size = true
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.890196, 0.890196, 0.890196, 1)
+theme_override_colors/font_shadow_color = Color(0.14902, 0.14902, 0.14902, 1)
+theme_override_fonts/font = ExtResource("4_g3m34")
+theme_override_font_sizes/font_size = 11
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_menu_panel_button_pressed"]

@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyafbpujaefdg"]
+
+[ext_resource type="Script" path="res://scripts/combat_encounter.gd" id="1_jmgt6"]
+[ext_resource type="FontFile" uid="uid://ch54rh77px14x" path="res://fonts/Libre_Franklin/static/LibreFranklin-Medium.ttf" id="2_u7jrw"]
+[ext_resource type="Texture2D" uid="uid://b8kofq5ik4swl" path="res://images/doublesword.png" id="3_2nxcx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jl0ho"]
+bg_color = Color(0.505882, 0.745098, 0.545098, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_igcl1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8c3q4"]
+bg_color = Color(0.901961, 0.580392, 0.545098, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="CombatEncounter" type="HBoxContainer"]
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+alignment = 1
+script = ExtResource("1_jmgt6")
+
+[node name="PlayerBox" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="PlayerProgressBar" type="ProgressBar" parent="PlayerBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_jl0ho")
+value = 100.0
+
+[node name="Label" type="Label" parent="PlayerBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_u7jrw")
+theme_override_font_sizes/font_size = 14
+text = "Player Name"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_igcl1")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+layout_mode = 2
+texture = ExtResource("3_2nxcx")
+expand_mode = 2
+
+[node name="EnemyBox" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="EnemyProgressBar" type="ProgressBar" parent="EnemyBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_8c3q4")
+value = 100.0
+
+[node name="Label" type="Label" parent="EnemyBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_u7jrw")
+theme_override_font_sizes/font_size = 14
+text = "Enemy Name"
+horizontal_alignment = 1
+
+[node name="PlayerAttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="EnemyAttackTimer" type="Timer" parent="."]
+wait_time = 2.6
+autostart = true
+
+[connection signal="timeout" from="PlayerAttackTimer" to="." method="_on_player_attack_timer_timeout"]
+[connection signal="timeout" from="EnemyAttackTimer" to="." method="_on_enemy_attack_timer_timeout"]

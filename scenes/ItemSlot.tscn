@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfdgdc4v81nae"]
+
+[ext_resource type="Script" path="res://scripts/ItemSlot.gd" id="1_gux8d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgxeb"]
+bg_color = Color(0.152941, 0.160784, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_25v55"]
+bg_color = Color(0.172549, 0.180392, 0.207843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vc088"]
+bg_color = Color(0.129412, 0.137255, 0.152941, 1)
+
+[node name="ItemSlot" type="Button"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 50)
+offset_right = 50.0
+offset_bottom = 50.0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_hgxeb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_25v55")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vc088")
+action_mode = 0
+script = ExtResource("1_gux8d")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[connection signal="button_down" from="." to="." method="_on_item_slot_button_down"]
+[connection signal="button_up" from="." to="." method="_on_item_slot_button_up"]
+[connection signal="mouse_exited" from="." to="." method="_on_item_slot_mouse_exited"]
