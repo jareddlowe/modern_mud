@@ -6,7 +6,7 @@ var associated_object
 
 func _ready():
 	if type == "enemy":
-		add_theme_stylebox_override("normal", load("res://scenes/interactable_normal_red.tres"))
+		add_theme_stylebox_override("normal", load("res://resources/interactable_normal_red.tres"))
 
 
 func _on_interactable_pressed():
