@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://uaqo0yob036"]
 
-[ext_resource type="PackedScene" uid="uid://b3eogw5bnooqg" path="res://scenes/villagetown.tscn" id="1_7askw"]
+[ext_resource type="PackedScene" uid="uid://bdvf2cer6y8fl" path="res://scenes/villagetown.tscn" id="1_7askw"]
 [ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_cm8g5"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_kr3jj"]
 [ext_resource type="Texture2D" uid="uid://bsv6ap7ljexry" path="res://images/vignette-horiz.png" id="2_8rc5h"]

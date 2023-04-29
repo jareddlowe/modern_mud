@@ -4,9 +4,11 @@ var main
 var type
 var associated_object
 
+
 func _ready():
 	if type == "enemy":
-		add_theme_stylebox_override("normal", load("res://resources/interactable_normal_red.tres"))
+		add_theme_stylebox_override("normal", 
+			load("res://resources/interactable_normal_red.tres"))
 
 
 func _on_interactable_pressed():
@@ -22,4 +24,3 @@ func _on_interactable_pressed():
 		await get_tree().create_timer(0.5).timeout
 		new_combat.get_node("PlayerAttackTimer").stop()
 		new_combat.get_node("PlayerAttackTimer").emit_signal("timeout")
-		

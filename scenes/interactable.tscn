@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3]
 
 [ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_ws6nj"]
-[ext_resource type="Script" path="res://scripts/interactable.gd" id="2_4pwhc"]
+[ext_resource type="Script" path="res://scripts/Interactable.gd" id="2_4pwhc"]
 [ext_resource type="Texture2D" uid="uid://bsv6ap7ljexry" path="res://images/vignette-horiz.png" id="2_5mhr0"]
 [ext_resource type="StyleBox" uid="uid://x2c2j2760yn0" path="res://resources/interactable_normal_green.tres" id="2_eicap"]
 [ext_resource type="StyleBox" uid="uid://dqbg3565jwrpb" path="res://resources/interactable_hover_green.tres" id="3_myitx"]

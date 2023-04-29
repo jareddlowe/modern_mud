@@ -1,16 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3eogw5bnooqg"]
+[gd_scene load_steps=7 format=3 uid="uid://bdvf2cer6y8fl"]
 
 [ext_resource type="PackedScene" uid="uid://enftdojxqdb6" path="res://scenes/location.tscn" id="1_co8lv"]
-[ext_resource type="Script" path="res://scripts/villagetown.gd" id="1_qrgm1"]
+[ext_resource type="Script" path="res://scripts/Villagetown.gd" id="1_v7h7d"]
 [ext_resource type="PackedScene" uid="uid://dp7c484kgl51r" path="res://scenes/Tutor.tscn" id="3_xcdfc"]
 [ext_resource type="Script" path="res://scripts/Tutor.gd" id="4_judhe"]
-[ext_resource type="PackedScene" uid="uid://wlayicb00joo" path="res://scenes/character_spawner.tscn" id="5_1lcf2"]
-[ext_resource type="PackedScene" uid="uid://cloy1fqlg5wop" path="res://scenes/goblin.tscn" id="5_j41pr"]
+[ext_resource type="PackedScene" path="res://scenes/character_spawner.tscn" id="5_1lcf2"]
+[ext_resource type="PackedScene" path="res://scenes/goblin.tscn" id="5_j41pr"]
 
 [node name="Villagetown" type="Node2D"]
 process_priority = 1
 z_index = -1
-script = ExtResource("1_qrgm1")
+script = ExtResource("1_v7h7d")
 
 [node name="Lines" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.0823529)

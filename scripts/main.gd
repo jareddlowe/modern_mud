@@ -153,12 +153,12 @@ func on_menu_button_pressed(button):
 
 func update_interactables(given_location):
 	var obj_list = []
-	if given_location.get_child_count() >= 0:
+	if given_location.get_child_count() > 0:
 		for obj in given_location.get_children(false):
 			if obj.get("type") == "npc" or obj.get("type") == "enemy":
 				obj_list.append(obj)
 	var interactable_list = []
-	if entity_panel_slots.get_child_count() >= 0:
+	if entity_panel_slots.get_child_count() > 0:
 		for interactable in entity_panel_slots.get_children():
 			interactable_list.append(interactable)
 	for interactable in interactable_list: # Clears object-less interactables.

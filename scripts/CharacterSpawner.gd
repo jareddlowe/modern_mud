@@ -11,7 +11,6 @@ func _ready():
 		template_character = get_child(1)
 		spawned_character = template_character.duplicate()
 		get_parent().add_child.call_deferred(spawned_character)
-		
 
 
 func _on_timer_timeout():

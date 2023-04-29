@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyafbpujaefdg"]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat_encounter.gd" id="1_jmgt6"]
+[ext_resource type="Script" path="res://scripts/CombatEncounter.gd" id="1_jmgt6"]
 [ext_resource type="FontFile" uid="uid://ch54rh77px14x" path="res://fonts/Libre_Franklin/static/LibreFranklin-Medium.ttf" id="2_u7jrw"]
 [ext_resource type="Texture2D" uid="uid://b8kofq5ik4swl" path="res://images/doublesword.png" id="3_2nxcx"]
 
