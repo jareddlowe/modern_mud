@@ -4,6 +4,11 @@ var type = "spawner"
 var spawned_character
 var template_character
 
+# This node is set up to be an NPC spawnpoint that persists in the world.
+# It is meant to be added as the child of a Location node.
+# Any NPC node which is added as a child of this node will become the template.
+# The template is spawned, and upon the character's death
+# we respawn the character after a short timer delay.
 
 func _ready():
 	# If there is a template character node added as child of CharacterSpawner...

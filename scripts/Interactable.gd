@@ -16,9 +16,7 @@ func _on_interactable_pressed():
 		print("Starting combat!")
 		var new_combat = load("res://scenes/CombatEncounter.tscn").instantiate()
 		new_combat.enemy = associated_object
-		new_combat.player = main.player
 		new_combat.enemy.associated_interactable = self
-		main.combat_encounter = new_combat
 		main.get_node("%InteractPanelMargin").add_child(new_combat)
 		await get_tree().create_timer(0.5).timeout
 		new_combat.get_node("PlayerAttackTimer").stop()

@@ -1,13 +1,17 @@
 extends HBoxContainer
 
 @onready var main = get_tree().get_current_scene()
-var player # Assigned by coder after instancing
+@onready var player = main.player
 var enemy # Assigned by coder after instancing
 var combat_ended = false
 var winner : String
 
+# This node handles combat. 
+# It is meant to be instanced as child of the UI event panel itself.
+# There is only meant to be one of these scenes "active" at a time.
 
 func _ready():
+	main.combat_encounter = self # This ensures only one is active at a time.
 	$PlayerAttackTimer.wait_time = player.attack_speed
 	$EnemyAttackTimer.wait_time = enemy.attack_speed
 	$PlayerBox/Label.text = player.name
