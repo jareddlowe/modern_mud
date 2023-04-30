@@ -14,7 +14,7 @@ func _ready():
 	$EnemyBox/Label.text = enemy.obj_name
 
 
-func _process(delta):
+func _process(_delta):
 	if combat_ended:
 		return
 	get_node("%PlayerProgressBar").value = (player.current_hp / player.max_hp) * 100.0

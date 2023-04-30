@@ -2,7 +2,7 @@ extends Node2D
 
 var camera_smoothing = 10  # Lower means slower panning.
 var camera_dest
-@onready var player = get_tree().get_root().get_child(0).get_node("%Player")
+@onready var player = get_tree().get_current_scene().get_node("%Player")
 
 
 func _ready():

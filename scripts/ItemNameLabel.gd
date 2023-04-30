@@ -3,7 +3,7 @@ extends Control
 @onready var main = get_parent().get_parent()
 
 
-func _process(delta):
+func _process(_delta):
 	var chosen_slot
 	for slot in main.get_node("%InventoryGrid").get_children():
 		if slot.check_if_mouse_above():

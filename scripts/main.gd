@@ -202,7 +202,7 @@ func populate_items(given_location):
 				index += 1
 
 
-func create_right_click_menu(node):
+func create_right_click_menu(_node):
 	if rc_menu:
 		rc_menu.queue_free()
 		rc_menu = null
