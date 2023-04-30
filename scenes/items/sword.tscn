@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://q77ajfk50oyr"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Texture2D" uid="uid://cdi5qsl6vaw0h" path="res://images/sword.png" id="1_1i8gu"]
-[ext_resource type="Script" path="res://scripts/items/sword.gd" id="2_rhtsi"]
+[ext_resource type="Script" path="res://scripts/items/Sword.gd" id="2_rhtsi"]
 
 [node name="Sword" type="TextureRect"]
 custom_minimum_size = Vector2i(35, 35)

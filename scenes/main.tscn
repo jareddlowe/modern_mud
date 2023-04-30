@@ -1,8 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://uaqo0yob036"]
+[gd_scene load_steps=35 format=3 uid="uid://cqeoiymbn5oo7"]
 
-[ext_resource type="PackedScene" uid="uid://bdvf2cer6y8fl" path="res://scenes/villagetown.tscn" id="1_7askw"]
+[ext_resource type="PackedScene" uid="uid://du4n31ytwc0jp" path="res://scenes/villagetown.tscn" id="1_7askw"]
 [ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_cm8g5"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_kr3jj"]
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_yak2d"]
 [ext_resource type="Texture2D" uid="uid://bsv6ap7ljexry" path="res://images/vignette-horiz.png" id="2_8rc5h"]
 [ext_resource type="Script" path="res://scripts/MovementLabel.gd" id="2_liwq0"]
 [ext_resource type="Script" path="res://scripts/MessagePanel.gd" id="3_60lpn"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bfdgdc4v81nae" path="res://scenes/ItemSlot.tscn" id="12_egasb"]
 [ext_resource type="Script" path="res://scripts/VirtualCursor.gd" id="14_wvm1r"]
 [ext_resource type="PackedScene" uid="uid://cfbjagvrd3t1x" path="res://scenes/Player.tscn" id="15_bfq0e"]
-[ext_resource type="PackedScene" uid="uid://bb3yfk7ryftrc" path="res://scenes/item_name.tscn" id="16_c7aye"]
+[ext_resource type="PackedScene" uid="uid://bb3yfk7ryftrc" path="res://scenes/ItemName.tscn" id="16_c7aye"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lp5fs"]
 bg_color = Color(0.105882, 0.109804, 0.121569, 1)
@@ -86,7 +86,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_lp5fs")
-script = ExtResource("1_kr3jj")
+script = ExtResource("1_yak2d")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.207843)

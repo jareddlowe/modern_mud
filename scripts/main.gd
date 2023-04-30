@@ -137,7 +137,7 @@ func add_message(text, sound=""):
 	if sound == "click":
 		$Clicker.pitch_scale = randf_range(2.5, 3.0)
 		$Clicker.playing = true
-	var new_label = load("res://scenes/Label.tscn").instantiate()
+	var new_label = load("res://scenes/Message.tscn").instantiate()
 	new_label.text = text
 	scroll_cont.get_node("VBoxContainer").add_child(new_label)
 	message_panel.message_panel_flash = true
@@ -173,7 +173,6 @@ func update_interactables(given_location):
 			new_interactable.associated_object = obj
 			new_interactable.type = obj.type
 			new_interactable.get_node("Label").text = obj.obj_name
-			new_interactable.main = self
 			entity_panel_slots.add_child(new_interactable)
 
 

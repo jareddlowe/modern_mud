@@ -1,16 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdvf2cer6y8fl"]
+[gd_scene load_steps=7 format=3 uid="uid://du4n31ytwc0jp"]
 
-[ext_resource type="PackedScene" uid="uid://enftdojxqdb6" path="res://scenes/location.tscn" id="1_co8lv"]
-[ext_resource type="Script" path="res://scripts/Villagetown.gd" id="1_v7h7d"]
-[ext_resource type="PackedScene" uid="uid://dp7c484kgl51r" path="res://scenes/Tutor.tscn" id="3_xcdfc"]
-[ext_resource type="Script" path="res://scripts/Tutor.gd" id="4_judhe"]
-[ext_resource type="PackedScene" path="res://scenes/character_spawner.tscn" id="5_1lcf2"]
-[ext_resource type="PackedScene" path="res://scenes/goblin.tscn" id="5_j41pr"]
+[ext_resource type="Script" path="res://scripts/Villagetown.gd" id="1_w3xj0"]
+[ext_resource type="PackedScene" path="res://scenes/location.tscn" id="2_so287"]
+[ext_resource type="PackedScene" uid="uid://dp7c484kgl51r" path="res://scenes/Tutor.tscn" id="3_x6h3v"]
+[ext_resource type="Script" path="res://scripts/Tutor.gd" id="4_wvl83"]
+[ext_resource type="PackedScene" path="res://scenes/CharacterSpawner.tscn" id="5_fpmuh"]
+[ext_resource type="PackedScene" path="res://scenes/goblin.tscn" id="6_ru7l2"]
 
 [node name="Villagetown" type="Node2D"]
 process_priority = 1
 z_index = -1
-script = ExtResource("1_v7h7d")
+script = ExtResource("1_w3xj0")
 
 [node name="Lines" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.0823529)
@@ -19,81 +19,81 @@ modulate = Color(1, 1, 1, 0.0823529)
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Village Square" parent="Locations" instance=ExtResource("1_co8lv")]
+[node name="Village Square" parent="Locations" instance=ExtResource("2_so287")]
 offset_left = 123.0
 offset_top = 176.0
 offset_right = 123.0
 offset_bottom = 176.0
 
-[node name="Tutor" parent="Locations/Village Square" instance=ExtResource("3_xcdfc")]
-script = ExtResource("4_judhe")
+[node name="Tutor" parent="Locations/Village Square" instance=ExtResource("3_x6h3v")]
+script = ExtResource("4_wvl83")
 
-[node name="Shops" parent="Locations" instance=ExtResource("1_co8lv")]
+[node name="Shops" parent="Locations" instance=ExtResource("2_so287")]
 offset_left = 114.0
 offset_top = 106.0
 offset_right = 114.0
 offset_bottom = 106.0
 metadata/_edit_layout_mode = 1
 
-[node name="Test" parent="Locations/Shops" instance=ExtResource("3_xcdfc")]
-script = ExtResource("4_judhe")
+[node name="Test" parent="Locations/Shops" instance=ExtResource("3_x6h3v")]
+script = ExtResource("4_wvl83")
 
-[node name="Test2" parent="Locations/Shops" instance=ExtResource("3_xcdfc")]
-script = ExtResource("4_judhe")
+[node name="Test2" parent="Locations/Shops" instance=ExtResource("3_x6h3v")]
+script = ExtResource("4_wvl83")
 
-[node name="Goblin Camp" parent="Locations" instance=ExtResource("1_co8lv")]
+[node name="Goblin Camp" parent="Locations" instance=ExtResource("2_so287")]
 offset_left = 209.0
 offset_top = 158.0
 offset_right = 209.0
 offset_bottom = 158.0
 metadata/_edit_layout_mode = 1
 
-[node name="CharacterSpawner" parent="Locations/Goblin Camp" instance=ExtResource("5_1lcf2")]
+[node name="CharacterSpawner" parent="Locations/Goblin Camp" instance=ExtResource("5_fpmuh")]
 
-[node name="Goblin" parent="Locations/Goblin Camp/CharacterSpawner" instance=ExtResource("5_j41pr")]
+[node name="Goblin" parent="Locations/Goblin Camp/CharacterSpawner" instance=ExtResource("6_ru7l2")]
 
-[node name="CharacterSpawner2" parent="Locations/Goblin Camp" instance=ExtResource("5_1lcf2")]
+[node name="CharacterSpawner2" parent="Locations/Goblin Camp" instance=ExtResource("5_fpmuh")]
 
-[node name="Goblin" parent="Locations/Goblin Camp/CharacterSpawner2" instance=ExtResource("5_j41pr")]
+[node name="Goblin" parent="Locations/Goblin Camp/CharacterSpawner2" instance=ExtResource("6_ru7l2")]
 
-[node name="CharacterSpawner3" parent="Locations/Goblin Camp" instance=ExtResource("5_1lcf2")]
+[node name="CharacterSpawner3" parent="Locations/Goblin Camp" instance=ExtResource("5_fpmuh")]
 
-[node name="Goblin" parent="Locations/Goblin Camp/CharacterSpawner3" instance=ExtResource("5_j41pr")]
+[node name="Goblin" parent="Locations/Goblin Camp/CharacterSpawner3" instance=ExtResource("6_ru7l2")]
 
-[node name="Swamps" parent="Locations" instance=ExtResource("1_co8lv")]
+[node name="Swamps" parent="Locations" instance=ExtResource("2_so287")]
 offset_left = 170.0
 offset_top = 240.0
 offset_right = 170.0
 offset_bottom = 240.0
 metadata/_edit_layout_mode = 1
 
-[node name="Tower" parent="Locations" instance=ExtResource("1_co8lv")]
+[node name="Tower" parent="Locations" instance=ExtResource("2_so287")]
 offset_left = 72.0
 offset_top = 252.0
 offset_right = 72.0
 offset_bottom = 252.0
 metadata/_edit_layout_mode = 1
 
-[node name="Woods" parent="Locations" instance=ExtResource("1_co8lv")]
+[node name="Woods" parent="Locations" instance=ExtResource("2_so287")]
 offset_left = 39.0
 offset_top = 160.0
 offset_right = 39.0
 offset_bottom = 160.0
 metadata/_edit_layout_mode = 1
 
-[node name="Gate" parent="Locations" instance=ExtResource("1_co8lv")]
+[node name="Gate" parent="Locations" instance=ExtResource("2_so287")]
 offset_left = 290.0
 offset_top = 184.0
 offset_right = 290.0
 offset_bottom = 184.0
 
-[node name="Farm" parent="Locations" instance=ExtResource("1_co8lv")]
+[node name="Farm" parent="Locations" instance=ExtResource("2_so287")]
 offset_left = 242.0
 offset_top = 85.0
 offset_right = 242.0
 offset_bottom = 85.0
 
-[node name="Mill" parent="Locations" instance=ExtResource("1_co8lv")]
+[node name="Mill" parent="Locations" instance=ExtResource("2_so287")]
 offset_left = 45.0
 offset_top = 73.0
 offset_right = 45.0

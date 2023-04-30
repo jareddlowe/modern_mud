@@ -1,9 +1,8 @@
 extends HBoxContainer
 
-var main # Assigned by coder after instancing
+@onready var main = get_tree().get_current_scene()
 var player # Assigned by coder after instancing
 var enemy # Assigned by coder after instancing
-var enemy_interactable # Assigned by coder after instancing
 var combat_ended = false
 var winner : String
 
@@ -44,7 +43,7 @@ func _on_enemy_attack_timer_timeout():
 	var damage_max = (enemy.strength / 2)
 	var damage = randi_range(0, damage_max)
 	var pos = get_node("PlayerBox").global_position + (get_node("PlayerBox").get_rect().size / 2)
-	var new_damage = load("res://scenes/floating_damage.tscn").instantiate()
+	var new_damage = load("res://scenes/FloatingDamage.tscn").instantiate()
 	pos.y -= 35
 	player.current_hp -= damage
 	new_damage.damage = damage
@@ -60,7 +59,7 @@ func _on_player_attack_timer_timeout():
 	var damage_max = (player.strength / 2)
 	var damage = randi_range(0, damage_max)
 	var pos = get_node("EnemyBox").global_position + (get_node("EnemyBox").get_rect().size / 2)
-	var new_damage = load("res://scenes/floating_damage.tscn").instantiate()
+	var new_damage = load("res://scenes/FloatingDamage.tscn").instantiate()
 	pos.y -= 35
 	enemy.current_hp -= damage
 	new_damage.damage = damage

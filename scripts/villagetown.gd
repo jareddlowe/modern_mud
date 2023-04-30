@@ -8,7 +8,9 @@ var camera_dest
 func _ready():
 	camera_dest = player
 	$Camera2D.global_position = player.global_position
-
+	
+	# Temporary solution to assign neighbors
+	# without having to read data from a file.
 	for i in $Locations.get_children():
 		if i.name == "Village Square":
 			i.neighbors = [
@@ -50,14 +52,14 @@ func _ready():
 		elif i.name == "Gate":
 			i.neighbors = [
 				$"Locations/Goblin Camp"]
-
+	
 	draw_lines()
+	
 	await get_tree().create_timer(0.5).timeout
 	owner.add_message("You arrive in the world.", "click")
 	await get_tree().create_timer(3).timeout
 	owner.add_message("Click locations on the [color=#fffaa9]map[/color] " \
 		+ "to travel! This will change your surroundings. ", "click")
-
 
 
 func _physics_process(_delta):
