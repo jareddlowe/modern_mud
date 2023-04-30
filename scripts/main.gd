@@ -27,15 +27,15 @@ func _ready():
 		nav_buttons.get_node("ItemsButton").connected_panel = inventory_panel
 		nav_buttons.get_node("SkillsButton").connected_panel = skills_panel
 	
-	var item1 = load("res://scenes/items/sword.tscn").instantiate()
+	var item1 = load("res://scenes/items/Bones.tscn").instantiate()
 	level.find_child("Village Square").items.append(item1)
 	
 	# To add an item, we change the slot's item id and set its texture.
-	var sword = load("res://scenes/items/sword.tscn").instantiate()
+	var sword = load("res://scenes/items/Sword.tscn").instantiate()
 	var slot = get_node("%InventoryGrid").get_child(0)
 	slot.add_item(sword)
 	
-	var bones = load("res://scenes/items/bones.tscn").instantiate()
+	var bones = load("res://scenes/items/Bones.tscn").instantiate()
 	slot = get_node("%InventoryGrid").get_child(1)
 	slot.add_item(bones)
 	
@@ -64,7 +64,7 @@ func _process(delta):
 func _input(event):
 	var slot_list
 	# Here we 'forget' to add the NearbyItemsGrid when player is moving
-	# To prevent the player from dropping items while moving between locations
+	# to prevent the player from dropping items while moving between locations.
 	if player.stopped:
 		slot_list = get_node("%InventoryGrid").get_children()
 		slot_list += get_node("%NearbyItemsGrid").get_children()
@@ -168,7 +168,7 @@ func update_interactables(given_location):
 		# If obj_list contains a interactable-less object, 
 		# make an interactable for it.
 		if not obj.associated_interactable:
-			var new_interactable = load("res://scenes/interactable.tscn").instantiate()
+			var new_interactable = load("res://scenes/Interactable.tscn").instantiate()
 			obj.associated_interactable = new_interactable
 			new_interactable.associated_object = obj
 			new_interactable.type = obj.type
@@ -206,7 +206,7 @@ func create_right_click_menu(node):
 	if rc_menu:
 		rc_menu.queue_free()
 		rc_menu = null
-	rc_menu = load("res://scenes/right_click_menu.tscn").instantiate()
+	rc_menu = load("res://scenes/RightClickMenu.tscn").instantiate()
 	$VirtualCursor.add_child(rc_menu)
 	rc_menu.global_position = get_global_mouse_position()
 

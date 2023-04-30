@@ -1,6 +1,5 @@
 extends Label
 
-
 var animation = ["       ", "       ", " >     ", " > >   ", " > > > "]
 var playing = false
 var current_index = 0

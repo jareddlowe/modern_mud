@@ -1,6 +1,6 @@
 extends Control
 
-@onready var main = get_tree().get_root().get_child(0)
+@onready var main = get_tree().get_current_scene()
 @onready var current_location = main.find_child("Goblin Camp")
 @onready var movement_label = main.get_node("%MovementLabel")
 @onready var dest = current_location
@@ -32,7 +32,7 @@ func create_phantom():
 	# Plan: break the connection between current_location and dest,
 	# then insert a temporary "phantom" location between them.
 	# This way we can pathfind properly even when between locations.
-	var phantom = load("res://scenes/location.tscn").instantiate()
+	var phantom = load("res://scenes/Location.tscn").instantiate()
 	phantom.global_position = global_position
 	# Using original_dest allows us to go back and forth multiple times.
 	# If we used dest, it would become current_location when backtracking,
@@ -86,7 +86,7 @@ func _location_clicked(clicked_location): # Sets dest.
 	if is_instance_valid(main.combat_encounter):
 		main.combat_encounter.combat_ended = true
 		main.combat_encounter.queue_free()
-		
+
 
 func _process(delta): # Sets current_location and handles movement.
 	dir = global_position.direction_to(dest.global_position)

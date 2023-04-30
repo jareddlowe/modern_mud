@@ -1,6 +1,5 @@
 extends PanelContainer
 
-
 @onready var panel_style = $%MessagePanelBody.get("theme_override_styles/panel")
 @onready var scroll_cont = $%MessageScrollContainer
 var message_panel_flash
@@ -22,7 +21,6 @@ func _process(delta):
 	else:
 		var color = lerp(panel_style.bg_color, Color(0.149, 0.156, 0.172), 0.07)
 		panel_style.bg_color = color
-
 
 
 func _scrollbar_max_changed():

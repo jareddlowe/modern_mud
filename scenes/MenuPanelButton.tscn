@@ -20,7 +20,7 @@ bg_color = Color(0.141176, 0.156863, 0.172549, 1)
 border_color = Color(0.12549, 0.141176, 0.160784, 1)
 
 [node name="MenuPanelButton" type="Button"]
-custom_minimum_size = Vector2i(50, 50)
+custom_minimum_size = Vector2(50, 50)
 offset_right = 50.0
 offset_bottom = 50.0
 size_flags_horizontal = 4
@@ -31,21 +31,20 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_yk5fe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_adhro")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_gi5rj")
 script = ExtResource("2_3m2uu")
-button_name = ""
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.823529)
-custom_minimum_size = Vector2i(50, 50)
-anchors_preset = 15
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_liow1")
-ignore_texture_size = true
+expand_mode = 1
 
 [node name="Label" type="Label" parent="."]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_bottom = -4.0

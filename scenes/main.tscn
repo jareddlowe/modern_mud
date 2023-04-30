@@ -382,7 +382,7 @@ unique_name_in_owner = true
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
-size = Vector2i(2, 2)
+size = Vector2i(300, 256)
 render_target_update_mode = 4
 
 [node name="Background" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/ViewportPanel/SubViewportContainer/SubViewport"]
@@ -788,27 +788,22 @@ theme_override_constants/separation = 5
 alignment = 1
 
 [node name="ActionsButton" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel/ButtonHBoxContainer" instance=ExtResource("11_yuoeo")]
-custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 button_name = "Actions"
 
 [node name="GearButton" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel/ButtonHBoxContainer" instance=ExtResource("11_yuoeo")]
-custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 button_name = "Gear"
 
 [node name="ItemsButton" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel/ButtonHBoxContainer" instance=ExtResource("11_yuoeo")]
-custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 button_name = "Items"
 
 [node name="SkillsButton" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel/ButtonHBoxContainer" instance=ExtResource("11_yuoeo")]
-custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 button_name = "Skills"
 
 [node name="QuestsButton" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/MenuNavigatePanel/ButtonHBoxContainer" instance=ExtResource("11_yuoeo")]
-custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 button_name = "Quests"
 

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dp7c484kgl51r" path="res://scenes/Tutor.tscn" id="3_x6h3v"]
 [ext_resource type="Script" path="res://scripts/Tutor.gd" id="4_wvl83"]
 [ext_resource type="PackedScene" path="res://scenes/CharacterSpawner.tscn" id="5_fpmuh"]
-[ext_resource type="PackedScene" path="res://scenes/goblin.tscn" id="6_ru7l2"]
+[ext_resource type="PackedScene" uid="uid://dj0gg131iaxkp" path="res://scenes/goblin.tscn" id="6_ru7l2"]
 
 [node name="Villagetown" type="Node2D"]
 process_priority = 1

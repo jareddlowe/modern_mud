@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=8 format=3 uid="uid://bik383kdfcnyv"]
 
 [ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_ws6nj"]
 [ext_resource type="Script" path="res://scripts/Interactable.gd" id="2_4pwhc"]

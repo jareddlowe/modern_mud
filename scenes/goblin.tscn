@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://dj0gg131iaxkp"]
 
 [ext_resource type="Script" path="res://scripts/Goblin.gd" id="1_lano7"]
 
