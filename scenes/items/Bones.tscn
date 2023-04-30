@@ -3,16 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://cr4l1x6ckmt2x" path="res://images/bones.png" id="1_d1ml6"]
 
 [node name="Bones" type="TextureRect"]
-custom_minimum_size = Vector2i(35, 35)
+custom_minimum_size = Vector2(35, 35)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -550.0
-offset_bottom = -750.0
+offset_right = -851.0
+offset_bottom = -765.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 texture = ExtResource("1_d1ml6")
-ignore_texture_size = true
+expand_mode = 1

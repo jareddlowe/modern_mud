@@ -34,9 +34,13 @@ func _ready():
 	var slot = get_node("%InventoryGrid").get_child(0)
 	slot.add_item(sword)
 	
-	var bones = load("res://scenes/items/Bones.tscn").instantiate()
+	var bones = load("res://scenes/items/Dagger.tscn").instantiate()
 	slot = get_node("%InventoryGrid").get_child(1)
 	slot.add_item(bones)
+	
+	var potion = load("res://scenes/items/HealingPotion.tscn").instantiate()
+	slot = get_node("%InventoryGrid").get_child(2)
+	slot.add_item(potion)
 	
 	for i in get_node("%InventoryGrid").get_children():
 		i.connect("item_right_clicked", create_right_click_menu)
