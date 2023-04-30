@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://du4n31ytwc0jp"]
 
 [ext_resource type="Script" path="res://scripts/Villagetown.gd" id="1_w3xj0"]
-[ext_resource type="PackedScene" path="res://scenes/location.tscn" id="2_so287"]
+[ext_resource type="PackedScene" path="res://scenes/Location.tscn" id="2_so287"]
 [ext_resource type="PackedScene" uid="uid://dp7c484kgl51r" path="res://scenes/Tutor.tscn" id="3_x6h3v"]
 [ext_resource type="Script" path="res://scripts/Tutor.gd" id="4_wvl83"]
 [ext_resource type="PackedScene" path="res://scenes/CharacterSpawner.tscn" id="5_fpmuh"]
