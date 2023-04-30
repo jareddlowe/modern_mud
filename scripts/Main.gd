@@ -42,6 +42,10 @@ func _ready():
 	slot = get_node("%InventoryGrid").get_child(2)
 	slot.add_item(potion)
 	
+	var scroll = load("res://scenes/items/Scroll.tscn").instantiate()
+	slot = get_node("%InventoryGrid").get_child(3)
+	slot.add_item(scroll)
+	
 	for i in get_node("%InventoryGrid").get_children():
 		i.connect("item_right_clicked", create_right_click_menu)
 		i.connect("item_dragged", _item_dragged)
