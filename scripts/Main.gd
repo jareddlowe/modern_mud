@@ -10,7 +10,7 @@ extends PanelContainer
 @onready var nav_buttons = $%ButtonHBoxContainer
 @onready var skills_panel = $%SkillsPanel
 @onready var entity_panel_slots = $%EntityPanelHFlow
-var combat_encounter
+var combat_encounter # Active/current combat encounter
 var message_panel_flash = false
 var counter = 0
 var previous_message
@@ -30,7 +30,6 @@ func _ready():
 	var item1 = load("res://scenes/items/Bones.tscn").instantiate()
 	level.find_child("Village Square").items.append(item1)
 	
-	# To add an item, we change the slot's item id and set its texture.
 	var sword = load("res://scenes/items/Sword.tscn").instantiate()
 	var slot = get_node("%InventoryGrid").get_child(0)
 	slot.add_item(sword)
@@ -182,13 +181,13 @@ func clear_interactables():
 
 
 func clear_items(given_location):
-	given_location.items = []
 	for slot in get_node("%NearbyItemsGrid").get_children():
 		var item
 		if slot.get_child(0).get_child_count() > 0:
 			item = slot.get_child(0).get_child(0)
 			item.get_parent().remove_child(item)
-			given_location.items.append(item)
+			if item not in given_location.items:
+				given_location.items.append(item)
 
 
 func populate_items(given_location):
