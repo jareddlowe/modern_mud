@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://cqeoiymbn5oo7"]
 
-[ext_resource type="PackedScene" uid="uid://du4n31ytwc0jp" path="res://scenes/villagetown.tscn" id="1_7askw"]
+[ext_resource type="PackedScene" uid="uid://du4n31ytwc0jp" path="res://scenes/Villagetown.tscn" id="1_7askw"]
 [ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_cm8g5"]
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_yak2d"]
 [ext_resource type="Texture2D" uid="uid://bsv6ap7ljexry" path="res://images/vignette-horiz.png" id="2_8rc5h"]
@@ -382,7 +382,7 @@ unique_name_in_owner = true
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
-size = Vector2i(300, 256)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Background" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/ViewportPanel/SubViewportContainer/SubViewport"]
