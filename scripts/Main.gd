@@ -214,7 +214,7 @@ func clear_interactables():
 		i.queue_free()
 
 
-func clear_items(given_location):
+func clear_items():
 	for slot in get_node("%NearbyItemsGrid").get_children():
 		var item
 		if slot.get_child(0).get_child_count() > 0:
