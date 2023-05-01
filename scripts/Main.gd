@@ -65,12 +65,13 @@ func _process(delta):
 		counter += 1 * delta
 	elif not no_interactables_mode:
 		update_interactables(player.current_location)
+		print(player.current_location.items)
 		counter = 0
 
 
 func _input(event):
 	var slot_list
-	# Here we 'forget' to add the NearbyItemsGrid when player is moving
+	# Here we 'forget' to add the NearbyItemsGrid when player is moving,
 	# to prevent the player from dropping items while moving between locations.
 	if player.stopped:
 		slot_list = get_node("%InventoryGrid").get_children()
@@ -79,7 +80,7 @@ func _input(event):
 		slot_list = get_node("%InventoryGrid").get_children()
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-	# Deposit any dragged item into the closest slot
+	# Deposit any dragged item into the closest slot.
 		if picked_item and !event.pressed:
 			var current_slot
 			for slot in slot_list:
@@ -99,12 +100,21 @@ func _input(event):
 					var old_item = closest_slot.get_child(0).get_child(0)
 					old_item.get_parent().remove_child(old_item)
 					last_picked_slot.add_item(old_item)
+					if last_picked_slot in get_node("%NearbyItemsGrid").get_children():
+						if old_item not in player.current_location.items:
+							player.current_location.items.append(old_item)
 					$VirtualCursor.remove_child(picked_item)
 					closest_slot.add_item(picked_item)
+					if closest_slot in get_node("%NearbyItemsGrid").get_children():
+						if picked_item not in player.current_location.items:
+							player.current_location.items.append(picked_item)
 					picked_item.modulate.a = 1.0
 				else:
 					picked_item.get_parent().remove_child(picked_item)
 					closest_slot.add_item(picked_item)
+					if closest_slot in get_node("%NearbyItemsGrid").get_children():
+						if picked_item not in player.current_location.items:
+							player.current_location.items.append(picked_item)
 					picked_item.modulate.a = 1.0
 				picked_item = null
 			else:
@@ -114,6 +124,13 @@ func _input(event):
 func _item_dragged(item, slot):
 	if not picked_item:
 		item.get_parent().remove_child(item)
+		# Here we check if item was dragged out of NearbyItemsGrid, because 
+		# we must remove the item from the location's item list.
+		# If we do not do this, and we take an item from NearbyItemsGrid,
+		# then populate_interactables(), populate_interactables() will 
+		# attempt to add_item() nodes which we've already taken into the inv.
+		if slot in get_node("%NearbyItemsGrid").get_children():
+			player.current_location.items.erase(item)
 		$VirtualCursor.add_child(item)
 		item.modulate.a = 0.2
 		last_picked_slot = slot
@@ -122,17 +139,26 @@ func _item_dragged(item, slot):
 
 func _item_dropped(slot):
 	if picked_item:
-		if slot.get_child(0).get_children().size() == 0:
+		if slot.get_child(0).get_children().size() == 0: # Drop item
 			$VirtualCursor.remove_child(picked_item)
 			slot.add_item(picked_item)
+			if slot in get_node("%NearbyItemsGrid").get_children():
+				if picked_item not in player.current_location.items:
+					player.current_location.items.append(picked_item)
 			picked_item.modulate.a = 1
 			picked_item = null
-		else:
+		else: # Swap items
 			var slot_item = slot.get_child(0).get_child(0)
 			slot_item.get_parent().remove_child(slot_item)
 			last_picked_slot.add_item(slot_item)
+			if last_picked_slot in get_node("%NearbyItemsGrid").get_children():
+				if slot_item not in player.current_location.items:
+					player.current_location.items.append(slot_item)
 			$VirtualCursor.remove_child(picked_item)
 			slot.add_item(picked_item)
+			if slot in get_node("%NearbyItemsGrid").get_children():
+				if picked_item not in player.current_location.items:
+					player.current_location.items.append(picked_item)
 			picked_item.modulate.a = 1
 			picked_item = null
 
@@ -194,19 +220,19 @@ func clear_items(given_location):
 		if slot.get_child(0).get_child_count() > 0:
 			item = slot.get_child(0).get_child(0)
 			item.get_parent().remove_child(item)
-			if item not in given_location.items:
-				given_location.items.append(item)
 
 
 func populate_items(given_location):
-	var index = 0
+	var slots = get_node("%NearbyItemsGrid").get_children()
+	var empty_slots = []
+	for slot in slots:
+		if slot.get_child(0).get_child_count() == 0:
+			empty_slots.append(slot)
 	for item in given_location.items:
-		var slot = get_node("%NearbyItemsGrid").get_child(index)
-		if slot != null:
-			if slot.get_child(0).get_child_count() == 0:
-				#slot.get_parent().remove_child(slot)
-				slot.add_item(item)
-				index += 1
+		if not is_instance_valid(item.get_parent()): # If item has no slot
+			var slot = empty_slots.pop_front()
+			slot.add_item(item)
+		
 
 
 func create_right_click_menu(_node):

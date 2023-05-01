@@ -45,11 +45,9 @@ func roll_for_item_drops(given_enemy):
 		var r = randf_range(0.0000,1.0000)
 		if r >= 0.0 and r <= given_enemy.drop_table[item]:
 			var new_item = load("res://scenes/items/"+ item + ".tscn").instantiate()
-			print(str(new_item.name))
 			player.current_location.items.append(new_item)
-			main.clear_items(player.current_location)
+			#main.clear_items(player.current_location)
 			main.populate_items(player.current_location)
-			
 
 
 func _on_enemy_attack_timer_timeout():
