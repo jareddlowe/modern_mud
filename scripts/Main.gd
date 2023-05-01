@@ -65,7 +65,6 @@ func _process(delta):
 		counter += 1 * delta
 	elif not no_interactables_mode:
 		update_interactables(player.current_location)
-		print(player.current_location.items)
 		counter = 0
 
 
