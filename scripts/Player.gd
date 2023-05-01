@@ -79,7 +79,7 @@ func _location_clicked(clicked_location): # Sets dest.
 			original_dest = dest
 			original_dist = global_position.distance_to(dest.global_position)
 			main.clear_interactables()
-			main.clear_items(current_location)
+			main.clear_items()
 			main.get_node("%DisabledVisual").visible = true
 		dist_to_walk = global_position.distance_to(dest.global_position)
 		description_sent = false
@@ -118,7 +118,7 @@ func auto_move():
 		dist_to_walk = global_position.distance_to(dest.global_position)
 		description_sent = false
 		main.get_node("%DisabledVisual").visible = true
-		main.clear_items(current_location)
+		main.clear_items()
 
 
 func update_location():
