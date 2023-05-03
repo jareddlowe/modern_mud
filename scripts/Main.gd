@@ -59,6 +59,7 @@ func _ready():
 	populate_items(player.current_location)
 
 
+
 func _process(delta):
 	erase_right_click_menu_if_mouse_is_far_enough()
 	if not no_interactables_mode and counter < 0.1:

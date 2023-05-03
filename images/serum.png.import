@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl28wdw3mki7y"
-path="res://.godot/imported/itemsheet1.png-2b334162ae91c769f37b4490f09b965f.ctex"
+uid="uid://c6p2ktludgp56"
+path="res://.godot/imported/serum.png-e33ebe5362ef4223b714a137ad5aa8cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/itemsheet1.png"
-dest_files=["res://.godot/imported/itemsheet1.png-2b334162ae91c769f37b4490f09b965f.ctex"]
+source_file="res://images/serum.png"
+dest_files=["res://.godot/imported/serum.png-e33ebe5362ef4223b714a137ad5aa8cd.ctex"]
 
 [params]
 
