@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://df475lpiq7lgp"]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://resources/item_res.gd" id="1_ttdym"]
-[ext_resource type="Texture2D" uid="uid://dsk1pw4mjf6ts" path="res://images/sword(1).png" id="2_24nll"]
+[ext_resource type="Texture2D" uid="uid://dsk1pw4mjf6ts" path="res://images/sword.png" id="2_24nll"]
 
 [resource]
 script = ExtResource("1_ttdym")
-name = "Sword"
+item_name = "Sword"
 texture = ExtResource("2_24nll")

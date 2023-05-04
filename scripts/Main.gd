@@ -27,24 +27,17 @@ func _ready():
 		nav_buttons.get_node("ItemsButton").connected_panel = inventory_panel
 		nav_buttons.get_node("SkillsButton").connected_panel = skills_panel
 	
-	var item1 = load("res://scenes/items/Bones.tscn").instantiate()
-	level.find_child("Village Square").items.append(item1)
+	var sword = load("res://scenes/Item.tscn").instantiate()
+	sword.item_resource = load("res://resources/Sword.tres")
+	sword.update_item_from_resource()
+	level.find_child("Village Square").items.append(sword)
 	
-	var sword = load("res://scenes/items/Sword.tscn").instantiate()
+	var sword2 = load("res://scenes/Item.tscn").instantiate()
+	sword2.item_resource = load("res://resources/Sword.tres")
+	sword2.update_item_from_resource()
 	var slot = get_node("%InventoryGrid").get_child(0)
-	slot.add_item(sword)
+	slot.add_item(sword2)
 	
-	var bones = load("res://scenes/items/Dagger.tscn").instantiate()
-	slot = get_node("%InventoryGrid").get_child(1)
-	slot.add_item(bones)
-	
-	var potion = load("res://scenes/items/HealingPotion.tscn").instantiate()
-	slot = get_node("%InventoryGrid").get_child(2)
-	slot.add_item(potion)
-	
-	var scroll = load("res://scenes/items/Scroll.tscn").instantiate()
-	slot = get_node("%InventoryGrid").get_child(3)
-	slot.add_item(scroll)
 	
 	for i in get_node("%InventoryGrid").get_children():
 		i.connect("item_right_clicked", create_right_click_menu)

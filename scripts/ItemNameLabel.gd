@@ -14,6 +14,6 @@ func _process(_delta):
 	if chosen_slot and chosen_slot.get_child(0).get_children().size() > 0 and main.rc_menu == null:
 		visible = true
 		var label = $Panel/MarginContainer/Label
-		label.text = chosen_slot.get_child(0).get_child(0).name
+		label.text = chosen_slot.get_child(0).get_child(0).item_name
 	else:
 		visible = false

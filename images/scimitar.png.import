@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6p2ktludgp56"
-path="res://.godot/imported/serum.png-e33ebe5362ef4223b714a137ad5aa8cd.ctex"
+uid="uid://cpddhthxk0erk"
+path="res://.godot/imported/scimitar.png-84099a50ca2c0fd5757df742c581b778.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/serum.png"
-dest_files=["res://.godot/imported/serum.png-e33ebe5362ef4223b714a137ad5aa8cd.ctex"]
+source_file="res://images/scimitar.png"
+dest_files=["res://.godot/imported/scimitar.png-84099a50ca2c0fd5757df742c581b778.ctex"]
 
 [params]
 

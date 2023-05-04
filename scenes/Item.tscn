@@ -1,20 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgyd8yg2lflyn"]
+[gd_scene load_steps=2 format=3 uid="uid://cgyd8yg2lflyn"]
 
-[ext_resource type="Script" path="res://scripts/ItemSlot.gd" id="1_gw1tb"]
+[ext_resource type="Script" path="res://scenes/Item.gd" id="1_tlcy1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5y4eq"]
-bg_color = Color(0.152941, 0.160784, 0.180392, 1)
-
-[node name="PanelContainer" type="PanelContainer"]
-custom_minimum_size = Vector2(50, 50)
-offset_right = 50.0
-offset_bottom = 50.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5y4eq")
-script = ExtResource("1_gw1tb")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+[node name="Item" type="TextureRect"]
+texture_filter = 6
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+expand_mode = 1
+script = ExtResource("1_tlcy1")

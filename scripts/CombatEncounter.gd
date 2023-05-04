@@ -41,7 +41,9 @@ func roll_for_item_drops(given_enemy):
 	for item in given_enemy.drop_table:
 		var r = randf_range(0.0000,1.0000)
 		if r >= 0.0 and r <= given_enemy.drop_table[item]:
-			var new_item = load("res://scenes/items/"+ item + ".tscn").instantiate()
+			var new_item = load("res://scenes/Item.tscn").instantiate()
+			new_item.item_resource = load("res://resources/" + item + ".tres")
+			new_item.update_item_from_resource()
 			player.current_location.items.append(new_item)
 			main.populate_items(player.current_location)
 
