@@ -12,6 +12,7 @@ bg_color = Color(0.172549, 0.180392, 0.207843, 1)
 bg_color = Color(0.129412, 0.137255, 0.152941, 1)
 
 [node name="ItemSlot" type="Button"]
+texture_filter = 6
 clip_contents = true
 custom_minimum_size = Vector2(50, 50)
 offset_right = 50.0
@@ -24,6 +25,7 @@ action_mode = 0
 script = ExtResource("1_gux8d")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+texture_filter = 6
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
 offset_right = 50.0
