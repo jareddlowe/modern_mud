@@ -20,7 +20,7 @@ var attack_speed = 2.0
 var current_hp = 10.0
 var max_hp = 10.0
 var strength = 10
-var inventory
+var inventory = []
 
 
 func _ready():
@@ -80,7 +80,7 @@ func _location_clicked(clicked_location): # Sets dest.
 			original_dest = dest
 			original_dist = global_position.distance_to(dest.global_position)
 			main.clear_interactables()
-			main.clear_items()
+			main.clear_nearby_items()
 			main.get_node("%DisabledVisual").visible = true
 		dist_to_walk = global_position.distance_to(dest.global_position)
 		description_sent = false

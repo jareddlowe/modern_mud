@@ -29,15 +29,13 @@ func _input(event):
 func use():
 	if type == "Buriable":
 		queue_free()
+		#main.player.inventory.erase(self)
 
 
 func move_to_inventory(item):
 	main.player.current_location.items.erase(item)
 	item.get_parent().remove_child(item)
-	for slot in main.get_node("%InventoryGrid").get_children():
-		if slot.get_child(0).get_child_count() == 0:
-			slot.add_item(item)
-			break
+	main.player.inventory.append(item)
 
 
 
