@@ -33,8 +33,7 @@ func _ready():
 	
 	var sword2 = load("res://scenes/Item.tscn").instantiate()
 	sword2.item_resource = load("res://resources/Sword.tres")
-	var slot = get_node("%InventoryGrid").get_child(0)
-	slot.add_item(sword2)
+	player.inventory.append(sword2)
 	
 	
 	for i in get_node("%InventoryGrid").get_children():
@@ -46,8 +45,6 @@ func _ready():
 		i.connect("item_right_clicked", create_right_click_menu)
 		i.connect("item_dragged", _item_dragged)
 		i.connect("item_dropped", _item_dropped)
-	
-	populate_items_in_location(player.current_location)
 
 
 
@@ -57,6 +54,8 @@ func _process(delta):
 		counter += 1 * delta
 	elif not no_interactables_mode:
 		update_interactables(player.current_location)
+		populate_items_in_inventory()
+		populate_items_in_location(player.current_location)
 		counter = 0
 
 
@@ -95,11 +94,17 @@ func _input(event):
 				if last_picked_slot in get_node("%NearbyItemsGrid").get_children():
 					if old_item not in player.current_location.items:
 						player.current_location.items.append(old_item)
+				elif last_picked_slot in get_node("%InventoryGrid").get_children():
+					if old_item not in player.inventory:
+						player.inventory.append(old_item)
 				$VirtualCursor.remove_child(picked_item)
 				closest_slot.add_item(picked_item)
 				if closest_slot in get_node("%NearbyItemsGrid").get_children():
 					if picked_item not in player.current_location.items:
 						player.current_location.items.append(picked_item)
+				elif closest_slot in get_node("%InventoryGrid").get_children():
+					if picked_item not in player.inventory:
+						player.inventory.append(picked_item)
 				picked_item.modulate.a = 1.0
 			else:
 				picked_item.get_parent().remove_child(picked_item)
@@ -107,6 +112,9 @@ func _input(event):
 				if closest_slot in get_node("%NearbyItemsGrid").get_children():
 					if picked_item not in player.current_location.items:
 						player.current_location.items.append(picked_item)
+				elif closest_slot in get_node("%InventoryGrid").get_children():
+					if picked_item not in player.inventory:
+						player.inventory.append(picked_item)
 				picked_item.modulate.a = 1.0
 			picked_item = null
 		else:
@@ -120,6 +128,8 @@ func _item_dragged(item, slot):
 		# we must remove the item from the location's item list.
 		if slot in get_node("%NearbyItemsGrid").get_children():
 			player.current_location.items.erase(item)
+		elif slot in get_node("%InventoryGrid").get_children():
+			player.inventory.erase(item)
 		$VirtualCursor.add_child(item)
 		item.modulate.a = 0.2
 		last_picked_slot = slot
@@ -134,6 +144,9 @@ func _item_dropped(slot):
 			if slot in get_node("%NearbyItemsGrid").get_children():
 				if picked_item not in player.current_location.items:
 					player.current_location.items.append(picked_item)
+			elif slot in get_node("%InventoryGrid").get_children():
+				if picked_item not in player.inventory:
+					player.inventory.append(picked_item)
 			picked_item.modulate.a = 1
 			picked_item = null
 		else: # Swap items
@@ -143,11 +156,17 @@ func _item_dropped(slot):
 			if last_picked_slot in get_node("%NearbyItemsGrid").get_children():
 				if slot_item not in player.current_location.items:
 					player.current_location.items.append(slot_item)
+			elif last_picked_slot in get_node("%InventoryGrid").get_children():
+				if slot_item not in player.inventory:
+					player.inventory.append(slot_item)
 			$VirtualCursor.remove_child(picked_item)
 			slot.add_item(picked_item)
 			if slot in get_node("%NearbyItemsGrid").get_children():
 				if picked_item not in player.current_location.items:
 					player.current_location.items.append(picked_item)
+			if slot in get_node("%InventoryGrid").get_children():
+				if picked_item not in player.inventory:
+					player.inventory.append(picked_item)
 			picked_item.modulate.a = 1
 			picked_item = null
 
@@ -203,7 +222,7 @@ func clear_interactables():
 		i.queue_free()
 
 
-func clear_items():
+func clear_nearby_items():
 	for slot in get_node("%NearbyItemsGrid").get_children():
 		var item
 		if slot.has_item():
@@ -221,6 +240,19 @@ func populate_items_in_location(given_location):
 		if not is_instance_valid(item.get_parent()): # If item has no slot
 			var slot = empty_slots.pop_front()
 			slot.add_item(item)
+
+
+func populate_items_in_inventory():
+	var slots = get_node("%InventoryGrid").get_children()
+	var empty_slots = []
+	for slot in slots:
+		if !slot.has_item():
+			empty_slots.append(slot)
+	for item in player.inventory:
+		if is_instance_valid(item):
+			if not is_instance_valid(item.get_parent()): # If item has no slot
+				var slot = empty_slots.pop_front()
+				slot.add_item(item)
 
 
 func create_right_click_menu(_node):
