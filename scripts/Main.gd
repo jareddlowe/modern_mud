@@ -29,12 +29,10 @@ func _ready():
 	
 	var sword = load("res://scenes/Item.tscn").instantiate()
 	sword.item_resource = load("res://resources/Sword.tres")
-	sword.update_item_from_resource()
 	level.find_child("Village Square").items.append(sword)
 	
 	var sword2 = load("res://scenes/Item.tscn").instantiate()
 	sword2.item_resource = load("res://resources/Sword.tres")
-	sword2.update_item_from_resource()
 	var slot = get_node("%InventoryGrid").get_child(0)
 	slot.add_item(sword2)
 	
@@ -89,8 +87,8 @@ func _input(event):
 					if dist < last_dist:
 						last_dist = dist
 						closest_slot = slot
-				if closest_slot.get_child(0).get_children().size() > 0:
-					var old_item = closest_slot.get_child(0).get_child(0)
+				if closest_slot.has_item():
+					var old_item = closest_slot.get_item()
 					old_item.get_parent().remove_child(old_item)
 					last_picked_slot.add_item(old_item)
 					if last_picked_slot in get_node("%NearbyItemsGrid").get_children():
@@ -132,7 +130,7 @@ func _item_dragged(item, slot):
 
 func _item_dropped(slot):
 	if picked_item:
-		if slot.get_child(0).get_children().size() == 0: # Drop item
+		if !slot.has_item(): # Drop item
 			$VirtualCursor.remove_child(picked_item)
 			slot.add_item(picked_item)
 			if slot in get_node("%NearbyItemsGrid").get_children():
@@ -141,7 +139,7 @@ func _item_dropped(slot):
 			picked_item.modulate.a = 1
 			picked_item = null
 		else: # Swap items
-			var slot_item = slot.get_child(0).get_child(0)
+			var slot_item = slot.get_item()
 			slot_item.get_parent().remove_child(slot_item)
 			last_picked_slot.add_item(slot_item)
 			if last_picked_slot in get_node("%NearbyItemsGrid").get_children():
@@ -210,7 +208,7 @@ func clear_interactables():
 func clear_items():
 	for slot in get_node("%NearbyItemsGrid").get_children():
 		var item
-		if slot.get_child(0).get_child_count() > 0:
+		if slot.has_item():
 			item = slot.get_child(0).get_child(0)
 			item.get_parent().remove_child(item)
 
@@ -219,13 +217,12 @@ func populate_items(given_location):
 	var slots = get_node("%NearbyItemsGrid").get_children()
 	var empty_slots = []
 	for slot in slots:
-		if slot.get_child(0).get_child_count() == 0:
+		if !slot.has_item():
 			empty_slots.append(slot)
 	for item in given_location.items:
 		if not is_instance_valid(item.get_parent()): # If item has no slot
 			var slot = empty_slots.pop_front()
 			slot.add_item(item)
-		
 
 
 func create_right_click_menu(_node):

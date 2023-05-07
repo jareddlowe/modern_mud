@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgyd8yg2lflyn"]
+[gd_scene load_steps=2 format=3 uid="uid://r0b7xto5h4ol"]
 
-[ext_resource type="Script" path="res://scenes/Item.gd" id="1_tlcy1"]
+[ext_resource type="Script" path="res://scripts/Item.gd" id="1_i65do"]
 
 [node name="Item" type="TextureRect"]
 texture_filter = 6
@@ -8,4 +8,4 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 expand_mode = 1
-script = ExtResource("1_tlcy1")
+script = ExtResource("1_i65do")

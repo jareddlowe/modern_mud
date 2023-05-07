@@ -20,6 +20,7 @@ var attack_speed = 2.0
 var current_hp = 10.0
 var max_hp = 10.0
 var strength = 10
+var inventory
 
 
 func _ready():
@@ -93,7 +94,8 @@ func _process(delta): # Sets current_location and handles movement.
 	dist = global_position.distance_to(dest.global_position)
 	if not stopped:
 		if dist > 0.5 and dist < 5:
-			global_position = global_position.lerp(dest.global_position, 0.05) # 0.05 high speed, 0.005 low speed
+			# 0.05 high speed, 0.005 low speed
+			global_position = global_position.lerp(dest.global_position, 0.05) 
 		elif dist < 0.5: # Stop, Resetting one-shot variables
 			update_location()
 			if current_location != final_dest:

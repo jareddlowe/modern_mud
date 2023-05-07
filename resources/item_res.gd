@@ -1,6 +1,6 @@
 extends Resource
-class_name Item
+class_name ItemResource
 
 @export var item_name : String
 @export var texture : Texture2D
-var default_use : Callable
+@export_enum("Equippable", "Consumable", "Buriable", "None") var type = "None"

@@ -22,6 +22,11 @@ func get_item():
 	return get_child(0).get_child(0)
 
 
+func has_item():
+	if get_child(0).get_child_count() > 0:
+		return true
+
+
 func check_if_mouse_above():
 	# Todo: check if this panel is active
 	var mpos = get_global_mouse_position()
