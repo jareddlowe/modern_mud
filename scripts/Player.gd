@@ -101,7 +101,7 @@ func _process(delta): # Sets current_location and handles movement.
 			if current_location != final_dest:
 				auto_move()
 			else: # Final stop
-				main.populate_items(dest)
+				main.populate_items_in_location(dest)
 				main.get_node("%DisabledVisual").visible = false
 				main.no_interactables_mode = false
 		elif dist > 5:
@@ -120,7 +120,7 @@ func auto_move():
 		dist_to_walk = global_position.distance_to(dest.global_position)
 		description_sent = false
 		main.get_node("%DisabledVisual").visible = true
-		main.clear_items()
+		main.clear_nearby_items()
 
 
 func update_location():
