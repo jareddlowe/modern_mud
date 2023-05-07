@@ -118,9 +118,6 @@ func _item_dragged(item, slot):
 		item.get_parent().remove_child(item)
 		# Here we check if item was dragged out of NearbyItemsGrid, because 
 		# we must remove the item from the location's item list.
-		# If we do not do this, and we take an item from NearbyItemsGrid,
-		# then populate_interactables(), populate_interactables() will 
-		# attempt to add_item() nodes which we've already taken into the inv.
 		if slot in get_node("%NearbyItemsGrid").get_children():
 			player.current_location.items.erase(item)
 		$VirtualCursor.add_child(item)
