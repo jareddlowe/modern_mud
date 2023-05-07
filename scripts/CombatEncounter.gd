@@ -44,7 +44,7 @@ func roll_for_item_drops(given_enemy):
 			var new_item = load("res://scenes/Item.tscn").instantiate()
 			new_item.item_resource = load("res://resources/" + item + ".tres")
 			player.current_location.items.append(new_item)
-			main.populate_items(player.current_location)
+			main.populate_items_in_location(player.current_location)
 
 
 func _on_enemy_attack_timer_timeout():

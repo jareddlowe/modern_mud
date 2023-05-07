@@ -47,7 +47,7 @@ func _ready():
 		i.connect("item_dragged", _item_dragged)
 		i.connect("item_dropped", _item_dropped)
 	
-	populate_items(player.current_location)
+	populate_items_in_location(player.current_location)
 
 
 
@@ -214,7 +214,7 @@ func clear_items():
 			item.get_parent().remove_child(item)
 
 
-func populate_items(given_location):
+func populate_items_in_location(given_location):
 	var slots = get_node("%NearbyItemsGrid").get_children()
 	var empty_slots = []
 	for slot in slots:
