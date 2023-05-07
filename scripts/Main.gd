@@ -72,44 +72,45 @@ func _input(event):
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 	# Deposit any dragged item into the closest slot.
-		if picked_item and !event.pressed:
-			var current_slot
+		if !picked_item or event.pressed:
+			return
+		var current_slot
+		for slot in slot_list:
+			if check_if_mouse_above(slot):
+				current_slot = slot
+		if current_slot == null:
+			var closest_slot
+			var last_dist = 10000
 			for slot in slot_list:
-				if check_if_mouse_above(slot):
-					current_slot = slot
-			if current_slot == null:
-				var closest_slot
-				var last_dist = 10000
-				for slot in slot_list:
-					var dist
-					var mouse_pos = get_global_mouse_position()
-					dist = mouse_pos.distance_to(slot.global_position)
-					if dist < last_dist:
-						last_dist = dist
-						closest_slot = slot
-				if closest_slot.has_item():
-					var old_item = closest_slot.get_item()
-					old_item.get_parent().remove_child(old_item)
-					last_picked_slot.add_item(old_item)
-					if last_picked_slot in get_node("%NearbyItemsGrid").get_children():
-						if old_item not in player.current_location.items:
-							player.current_location.items.append(old_item)
-					$VirtualCursor.remove_child(picked_item)
-					closest_slot.add_item(picked_item)
-					if closest_slot in get_node("%NearbyItemsGrid").get_children():
-						if picked_item not in player.current_location.items:
-							player.current_location.items.append(picked_item)
-					picked_item.modulate.a = 1.0
-				else:
-					picked_item.get_parent().remove_child(picked_item)
-					closest_slot.add_item(picked_item)
-					if closest_slot in get_node("%NearbyItemsGrid").get_children():
-						if picked_item not in player.current_location.items:
-							player.current_location.items.append(picked_item)
-					picked_item.modulate.a = 1.0
-				picked_item = null
+				var dist
+				var mouse_pos = get_global_mouse_position()
+				dist = mouse_pos.distance_to(slot.global_position)
+				if dist < last_dist:
+					last_dist = dist
+					closest_slot = slot
+			if closest_slot.has_item():
+				var old_item = closest_slot.get_item()
+				old_item.get_parent().remove_child(old_item)
+				last_picked_slot.add_item(old_item)
+				if last_picked_slot in get_node("%NearbyItemsGrid").get_children():
+					if old_item not in player.current_location.items:
+						player.current_location.items.append(old_item)
+				$VirtualCursor.remove_child(picked_item)
+				closest_slot.add_item(picked_item)
+				if closest_slot in get_node("%NearbyItemsGrid").get_children():
+					if picked_item not in player.current_location.items:
+						player.current_location.items.append(picked_item)
+				picked_item.modulate.a = 1.0
 			else:
-				current_slot.emit_signal("item_dropped", current_slot)
+				picked_item.get_parent().remove_child(picked_item)
+				closest_slot.add_item(picked_item)
+				if closest_slot in get_node("%NearbyItemsGrid").get_children():
+					if picked_item not in player.current_location.items:
+						player.current_location.items.append(picked_item)
+				picked_item.modulate.a = 1.0
+			picked_item = null
+		else:
+			current_slot.emit_signal("item_dropped", current_slot)
 
 
 func _item_dragged(item, slot):
