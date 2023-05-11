@@ -18,6 +18,7 @@ var rc_menu
 var last_picked_slot
 var picked_item
 var no_interactables_mode = false
+var player_inv_res = load("res://resources/player_inv.tres")
 
 
 func _ready():
@@ -26,6 +27,31 @@ func _ready():
 		i.connect("menu_button_pressed", on_menu_button_pressed)
 		nav_buttons.get_node("ItemsButton").connected_panel = inventory_panel
 		nav_buttons.get_node("SkillsButton").connected_panel = skills_panel
+	
+	# Add visual slot scenes
+	for slot in player_inv_res.slots:
+		var new_slot = load("res://scenes/ItemSlot.tscn").instantiate()
+		$%InventoryGrid.add_child(new_slot)
+	
+	player_inv_res.slots[0].item = load("res://resources/items/Sword.tres")
+	#update_player_inventory()
+
+
+func update_player_inventory():
+	var index = 0
+	# Populate visual slot scenes with the data
+	for slot in $%InventoryGrid.get_children():
+		if player_inv_res.slots[index].item == null:
+			slot.remove_item_from_slot()
+		else:
+			if slot.has_item():
+				slot.remove_item_from_slot()
+			var new_item = load("res://scenes/Item.tscn").instantiate()
+			new_item.item_resource = player_inv_res.slots[index].item
+			slot.add_item(new_item)
+		index += 1
+	
+
 
 
 func _process(delta):
@@ -34,7 +60,7 @@ func _process(delta):
 		counter += 1 * delta
 	elif not no_interactables_mode:
 		update_interactables(player.current_location)
-		#populate_items_in_inventory()
+		update_player_inventory()
 		populate_items_in_location(player.current_location)
 		counter = 0
 

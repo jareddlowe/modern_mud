@@ -1,7 +1,7 @@
 extends TextureRect
 class_name GameItem
 
-@export var item_resource : Resource
+@export var item_resource : ItemData
 var item_name : String
 var use_function : Callable
 @onready var main = get_tree().get_current_scene()
@@ -25,6 +25,7 @@ func _input(event):
 					use()
 				elif get_parent().get_parent() in main.get_node("%NearbyItemsGrid").get_children():
 					move_to_inventory(self)
+
 
 func use():
 	if type == "Buriable":

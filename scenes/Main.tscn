@@ -312,7 +312,7 @@ unique_name_in_owner = true
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
-size = Vector2i(300, 256)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Background" type="ColorRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/MapPanel/VBoxContainer/ViewportPanel/SubViewportContainer/SubViewport"]
@@ -802,102 +802,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 columns = 4
-
-[node name="ItemSlot1" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot2" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot3" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot4" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot5" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot6" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot7" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot8" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot9" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot10" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot11" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot12" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot13" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot14" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot15" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot16" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot17" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot18" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot19" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot20" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot21" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot22" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot23" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot24" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot25" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot26" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot27" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot28" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot29" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot30" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot31" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
-
-[node name="ItemSlot32" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/InventoryPanel/VBoxContainer/InventoryPanelBody/VBoxContainer/CenterContainer/InventoryGrid" instance=ExtResource("12_egasb")]
-layout_mode = 2
 
 [node name="SkillsPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer"]
 unique_name_in_owner = true
