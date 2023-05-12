@@ -19,6 +19,7 @@ var last_picked_slot
 var picked_item
 var no_interactables_mode = false
 var player_inv_res = load("res://resources/player_inv.tres")
+var nearby_items_res = load("res://resources/nearby_items.tres")
 
 
 func _ready():
@@ -33,8 +34,91 @@ func _ready():
 		var new_slot = load("res://scenes/ItemSlot.tscn").instantiate()
 		$%InventoryGrid.add_child(new_slot)
 	
-	player_inv_res.slots[0].item = load("res://resources/items/Sword.tres")
-	#update_player_inventory()
+	for slot_data in nearby_items_res.slots:
+		var new_slot = load("res://scenes/ItemSlot.tscn").instantiate()
+		$%NearbyItemsGrid.add_child(new_slot)
+		new_slot.modulate = Color(1.1, 1.1, 1.1)
+	
+	for i in get_node("%InventoryGrid").get_children():
+		i.connect("item_right_clicked", create_right_click_menu)
+		i.connect("item_dragged", _item_dragged)
+	
+	for i in get_node("%NearbyItemsGrid").get_children():
+		i.connect("item_right_clicked", create_right_click_menu)
+		i.connect("item_dragged", _item_dragged)
+	
+	add_item_to_first_empty_slot(load("res://resources/items/Sword.tres"))
+	await get_tree().create_timer(2.0).timeout
+	add_item_to_first_empty_slot(load("res://resources/items/Potion.tres"))
+	await get_tree().create_timer(1.0).timeout
+	add_item_to_first_empty_slot(load("res://resources/items/Potion.tres"))
+	await get_tree().create_timer(1.0).timeout
+	add_item_to_first_empty_slot(load("res://resources/items/Sword.tres"))
+
+
+func _process(delta):
+	#erase_right_click_menu_if_mouse_is_far_enough()
+	if not no_interactables_mode and counter < 0.05:
+		counter += 1 * delta
+	elif not no_interactables_mode:
+		update_interactables(player.current_location)
+		update_player_inventory()
+		populate_items_in_location(player.current_location)
+		counter = 0
+
+
+func _input(event):
+	if not event is InputEventMouseButton:
+		return
+	
+	if event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
+		if is_instance_valid(picked_item): # Get closest slot
+			var slot_list = []
+			for i in $%InventoryGrid.get_children():
+				slot_list.append(i)
+			for i in $%NearbyItemsGrid.get_children():
+				slot_list.append(i)
+			var closest_slot = get_closest_node(slot_list, Vector2(25,25))
+			var existing_item = player_inv_res.slots[closest_slot.get_index()].item
+			if existing_item: # Swap
+				player_inv_res.slots[closest_slot.get_index()].item = picked_item.item_resource
+				picked_item.queue_free()
+				player_inv_res.slots[last_picked_slot.get_index()].item = existing_item
+			else: # Drop
+				player_inv_res.slots[closest_slot.get_index()].item = picked_item.item_resource
+				picked_item.queue_free()
+
+
+func get_closest_node(node_list, offset):
+	var dist = 99999
+	var closest_node
+	var mouse_pos = get_global_mouse_position()
+	for node in node_list:
+		var pos = node.global_position + offset
+		var new_dist = pos.distance_to(mouse_pos)
+		if new_dist < dist:
+			dist = new_dist
+			closest_node = node
+	return closest_node
+
+
+func _item_dragged(item, slot):
+	player_inv_res.slots[slot.get_index()].item = null
+	item.get_parent().remove_child(item)
+	$VirtualCursor.add_child(item)
+	picked_item = item
+	last_picked_slot = slot
+
+
+func add_item_to_first_empty_slot(item):
+	var empty_slots
+	var index = 0
+	for slot in player_inv_res.slots:
+		if slot.item == null:
+			if not $%InventoryGrid.get_child(index) == last_picked_slot:
+				slot.item = item
+				break
+		index += 1
 
 
 func update_player_inventory():
@@ -50,19 +134,6 @@ func update_player_inventory():
 			new_item.item_resource = player_inv_res.slots[index].item
 			slot.add_item(new_item)
 		index += 1
-	
-
-
-
-func _process(delta):
-	#erase_right_click_menu_if_mouse_is_far_enough()
-	if not no_interactables_mode and counter < 0.1:
-		counter += 1 * delta
-	elif not no_interactables_mode:
-		update_interactables(player.current_location)
-		update_player_inventory()
-		populate_items_in_location(player.current_location)
-		counter = 0
 
 
 func add_message(text, sound=""):
@@ -156,7 +227,6 @@ func erase_right_click_menu_if_mouse_is_far_enough():
 
 
 func check_if_mouse_above(i):
-	# Todo: check if this panel is active
 	var pos = get_global_mouse_position()
 	if pos.x > i.global_position.x and pos.x < i.global_position.x + i.size.x:
 		if pos.y > i.global_position.y and pos.y < i.global_position.y + i.size.y:

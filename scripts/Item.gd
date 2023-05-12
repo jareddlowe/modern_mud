@@ -30,13 +30,11 @@ func _input(event):
 func use():
 	if type == "Buriable":
 		queue_free()
-		#main.player.inventory.erase(self)
+		#main.player_inv_res.slots
 
 
 func move_to_inventory(item):
 	main.player.current_location.items.erase(item)
 	item.get_parent().remove_child(item)
 	main.player.inventory.append(item)
-
-
 
