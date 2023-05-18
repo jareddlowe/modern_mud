@@ -1,10 +1,11 @@
 extends Control
 
 @onready var main = get_tree().get_current_scene()
-@onready var current_location = main.find_child("Goblin Camp")
+@onready var location = main.find_child("Goblin Camp")
 @onready var movement_label = main.get_node("%MovementLabel")
-@onready var dest = current_location
-@onready var final_dest = current_location
+@onready var dest = location
+@onready var final_dest = location
+@onready var inv_manager = main.get_node("InventoryManager")
 signal location_changed
 var speed = 100
 var description_sent = false
@@ -20,40 +21,40 @@ var attack_speed = 2.0
 var current_hp = 10.0
 var max_hp = 10.0
 var strength = 10
-var inventory = []
+var inventory = load("res://resources/player_inv.tres")
 
 
 func _ready():
-	global_position = current_location.global_position
+	global_position = location.global_position
 	for i in main.find_child("Locations").get_children():
 		i.location_clicked.connect(_location_clicked)
 
 
 func create_phantom():
-	# Plan: break the connection between current_location and dest,
+	# Plan: break the connection between location and dest,
 	# then insert a temporary "phantom" location between them.
 	# This way we can pathfind properly even when between locations.
 	var phantom = load("res://scenes/Location.tscn").instantiate()
 	phantom.global_position = global_position
 	# Using original_dest allows us to go back and forth multiple times.
-	# If we used dest, it would become current_location when backtracking,
+	# If we used dest, it would become location when backtracking,
 	# which breaks the logic because it is added to the neighbors list twice.
-	phantom.neighbors = [current_location, original_dest]
+	phantom.neighbors = [location, original_dest]
 	# Break the connection between the two locations.
-	current_location.neighbors.erase(dest)
-	dest.neighbors.erase(current_location)
+	location.neighbors.erase(dest)
+	dest.neighbors.erase(location)
 	# Insert phantom.
-	current_location.neighbors.push_front(phantom)
+	location.neighbors.push_front(phantom)
 	dest.neighbors.push_front(phantom)
 	first_dest = dest
 	return phantom
 
 
 func delete_phantom(phantom):
-	current_location.neighbors.erase(phantom)
+	location.neighbors.erase(phantom)
 	first_dest.neighbors.erase(phantom)
-	current_location.neighbors.push_front(first_dest)
-	first_dest.neighbors.push_front(current_location)
+	location.neighbors.push_front(first_dest)
+	first_dest.neighbors.push_front(location)
 	phantom.queue_free()
 
 
@@ -70,7 +71,7 @@ func _location_clicked(clicked_location): # Sets dest.
 			movement_label.playing = true
 		delete_phantom(phantom)
 	else: # If player is at a location...
-		path = find_path(current_location, final_dest)
+		path = find_path(location, final_dest)
 		if path:
 			dest = path[0]
 			stopped = false
@@ -80,7 +81,7 @@ func _location_clicked(clicked_location): # Sets dest.
 			original_dest = dest
 			original_dist = global_position.distance_to(dest.global_position)
 			main.clear_interactables()
-			main.clear_nearby_items()
+			inv_manager.clear_nearby_items()
 			main.get_node("%DisabledVisual").visible = true
 		dist_to_walk = global_position.distance_to(dest.global_position)
 		description_sent = false
@@ -89,7 +90,7 @@ func _location_clicked(clicked_location): # Sets dest.
 		main.current_event.queue_free()
 
 
-func _process(delta): # Sets current_location and handles movement.
+func _process(delta): # Sets location and handles movement.
 	dir = global_position.direction_to(dest.global_position)
 	dist = global_position.distance_to(dest.global_position)
 	if not stopped:
@@ -98,10 +99,10 @@ func _process(delta): # Sets current_location and handles movement.
 			global_position = global_position.lerp(dest.global_position, 0.05) 
 		elif dist < 0.5: # Stop, Resetting one-shot variables
 			update_location()
-			if current_location != final_dest:
+			if location != final_dest:
 				auto_move()
 			else: # Final stop
-				main.populate_items_in_location(dest)
+				inv_manager.populate_items_in_location(dest)
 				main.get_node("%DisabledVisual").visible = false
 				main.no_interactables_mode = false
 		elif dist > 5:
@@ -110,7 +111,7 @@ func _process(delta): # Sets current_location and handles movement.
 
 func auto_move():
 	print("Automoving...")
-	path = find_path(current_location, final_dest)
+	path = find_path(location, final_dest)
 	if path:
 		dest = path[0]
 		stopped = false
@@ -124,7 +125,7 @@ func auto_move():
 
 
 func update_location():
-	current_location = dest
+	location = dest
 	description_sent = false
 	stopped = true
 	movement_label.playing = false
@@ -158,7 +159,7 @@ func find_path(start, end):
 		curNode = curNode.pathfinding_parent
 	# Reset pathfinding variables.
 	var locations = main.level.get_node("Locations")
-	for location in locations.get_children():
-		location.pathfinding_parent = null
-		location.pathfinding_visited = false
+	for loc in locations.get_children():
+		loc.pathfinding_parent = null
+		loc.pathfinding_visited = false
 	return _path

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cqeoiymbn5oo7"]
+[gd_scene load_steps=35 format=3 uid="uid://cqeoiymbn5oo7"]
 
 [ext_resource type="PackedScene" uid="uid://du4n31ytwc0jp" path="res://scenes/Villagetown.tscn" id="1_7askw"]
 [ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_cm8g5"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://scripts/VirtualCursor.gd" id="14_wvm1r"]
 [ext_resource type="PackedScene" uid="uid://cfbjagvrd3t1x" path="res://scenes/Player.tscn" id="15_bfq0e"]
 [ext_resource type="PackedScene" uid="uid://bb3yfk7ryftrc" path="res://scenes/ItemName.tscn" id="16_c7aye"]
+[ext_resource type="Script" path="res://scripts/InventoryManager.gd" id="17_ahktw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lp5fs"]
 bg_color = Color(0.105882, 0.109804, 0.121569, 1)
@@ -1542,6 +1543,11 @@ script = ExtResource("14_wvm1r")
 
 [node name="ItemNameLabel" parent="VirtualCursor" instance=ExtResource("16_c7aye")]
 layout_mode = 1
+
+[node name="InventoryManager" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("17_ahktw")
 
 [node name="Clicker" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_r7lbd")
