@@ -2,6 +2,7 @@ extends HBoxContainer
 
 @onready var main = get_tree().get_current_scene()
 @onready var player = main.player
+@onready var inv_manager = main.get_node("InventoryManager")
 var enemy # Assigned by coder after instancing
 var combat_ended = false
 var winner : String
@@ -41,10 +42,9 @@ func roll_for_item_drops(given_enemy):
 	for item in given_enemy.drop_table:
 		var r = randf_range(0.0000,1.0000)
 		if r >= 0.0 and r <= given_enemy.drop_table[item]:
-			var new_item = load("res://scenes/Item.tscn").instantiate()
-			new_item.item_resource = load("res://resources/items/" + item + ".tres")
+			var res = load("res://resources/items/" + item + ".tres")
+			inv_manager.add_item(res, player.location.inventory)
 			#player.current_location.items.append(new_item)
-			#main.populate_items_in_location(player.current_location)
 
 
 func _on_enemy_attack_timer_timeout():

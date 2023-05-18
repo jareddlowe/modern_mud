@@ -7,7 +7,7 @@ var pathfinding_visited = false
 var pathfinding_parent
 var interactables
 var description = "The next area comes into view."
-var location_inv # Generated in _ready()
+var inventory # Generated in _ready()
 
 
 func _ready():
@@ -15,9 +15,9 @@ func _ready():
 		$Label.visible = true
 		$Label.text = self.name
 	
-	location_inv = InvData.new()
+	inventory = InvData.new()
 	for i in range(0,20):
-		location_inv.slots.append(SlotData.new())
+		inventory.slots.append(SlotData.new())
 	
 
 func _process(_delta):
