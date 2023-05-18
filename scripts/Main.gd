@@ -20,7 +20,7 @@ var picked_item
 var no_interactables_mode = false
 var player_inv_res = load("res://resources/player_inv.tres")
 var nearby_items_res = load("res://resources/nearby_items.tres")
-
+var last_picked_slot_inventory
 
 func _ready():
 	DisplayServer.window_set_min_size(Vector2(886, 800))
@@ -62,7 +62,7 @@ func _process(delta):
 		counter += 1 * delta
 	elif not no_interactables_mode:
 		update_interactables(player.current_location)
-		update_player_inventory()
+		update_inventories()
 		populate_items_in_location(player.current_location)
 		counter = 0
 
@@ -79,14 +79,26 @@ func _input(event):
 			for i in $%NearbyItemsGrid.get_children():
 				slot_list.append(i)
 			var closest_slot = get_closest_node(slot_list, Vector2(25,25))
-			var existing_item = player_inv_res.slots[closest_slot.get_index()].item
+			var existing_item
+			var inventory
+			var closest_slot_inventory
+			
+			if closest_slot in $%NearbyItemsGrid.get_children():
+				existing_item = player.current_location.location_inv.slots[closest_slot.get_index()].item
+				closest_slot_inventory = player.current_location.location_inv
+			elif closest_slot in $%InventoryGrid.get_children():
+				existing_item = player_inv_res.slots[closest_slot.get_index()].item
+				closest_slot_inventory = player_inv_res
+			
 			if existing_item: # Swap
-				player_inv_res.slots[closest_slot.get_index()].item = picked_item.item_resource
+				closest_slot_inventory.slots[closest_slot.get_index()].item = picked_item.item_resource
 				picked_item.queue_free()
-				player_inv_res.slots[last_picked_slot.get_index()].item = existing_item
+				last_picked_slot_inventory.slots[last_picked_slot.get_index()].item = existing_item
+				last_picked_slot = null
 			else: # Drop
-				player_inv_res.slots[closest_slot.get_index()].item = picked_item.item_resource
+				closest_slot_inventory.slots[closest_slot.get_index()].item = picked_item.item_resource
 				picked_item.queue_free()
+				last_picked_slot = null
 
 
 func get_closest_node(node_list, offset):
@@ -103,11 +115,19 @@ func get_closest_node(node_list, offset):
 
 
 func _item_dragged(item, slot):
-	player_inv_res.slots[slot.get_index()].item = null
+	last_picked_slot = slot
+	
+	if slot.get_parent().name == "InventoryGrid":
+		slot.get_parent().resource.slots[slot.get_index()].item = null
+		last_picked_slot_inventory = slot.get_parent().resource
+	else:
+		# If dragged out of nearbyitems:
+		player.current_location.location_inv.slots[slot.get_index()].item = null
+		last_picked_slot_inventory = player.current_location.location_inv
 	item.get_parent().remove_child(item)
 	$VirtualCursor.add_child(item)
 	picked_item = item
-	last_picked_slot = slot
+	
 
 
 func add_item_to_first_empty_slot(item):
@@ -121,9 +141,8 @@ func add_item_to_first_empty_slot(item):
 		index += 1
 
 
-func update_player_inventory():
+func update_inventories():
 	var index = 0
-	# Populate visual slot scenes with the data
 	for slot in $%InventoryGrid.get_children():
 		if player_inv_res.slots[index].item == null:
 			slot.remove_item_from_slot()
@@ -132,6 +151,18 @@ func update_player_inventory():
 				slot.remove_item_from_slot()
 			var new_item = load("res://scenes/Item.tscn").instantiate()
 			new_item.item_resource = player_inv_res.slots[index].item
+			slot.add_item(new_item)
+		index += 1
+
+	index = 0
+	for slot in $%NearbyItemsGrid.get_children():
+		if player.current_location.location_inv.slots[index].item == null:
+			slot.remove_item_from_slot()
+		else:
+			if slot.has_item():
+				slot.remove_item_from_slot()
+			var new_item = load("res://scenes/Item.tscn").instantiate()
+			new_item.item_resource = player.current_location.location_inv.slots[index].item
 			slot.add_item(new_item)
 		index += 1
 
@@ -201,10 +232,8 @@ func populate_items_in_location(given_location):
 	for slot in slots:
 		if !slot.has_item():
 			empty_slots.append(slot)
-	for item in given_location.items:
-		if not is_instance_valid(item.get_parent()): # If item has no slot
-			var slot = empty_slots.pop_front()
-			slot.add_item(item)
+	for item in given_location.location_inv.slots:
+		pass
 
 
 func create_right_click_menu(_node):

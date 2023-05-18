@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cqeoiymbn5oo7"]
+[gd_scene load_steps=34 format=3 uid="uid://cqeoiymbn5oo7"]
 
 [ext_resource type="PackedScene" uid="uid://du4n31ytwc0jp" path="res://scenes/Villagetown.tscn" id="1_7askw"]
 [ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_cm8g5"]
@@ -9,8 +9,11 @@
 [ext_resource type="FontFile" uid="uid://ch54rh77px14x" path="res://fonts/Libre_Franklin/static/LibreFranklin-Medium.ttf" id="4_8od1s"]
 [ext_resource type="Texture2D" uid="uid://cmubxng0teonw" path="res://images/vignette.png" id="4_543l6"]
 [ext_resource type="FontFile" uid="uid://c3i7yokjr1tgc" path="res://fonts/Libre_Franklin/static/LibreFranklin-Regular.ttf" id="9_s1pdl"]
+[ext_resource type="Script" path="res://scenes/NearbyItemsGrid.gd" id="10_e1tq7"]
 [ext_resource type="AudioStream" uid="uid://k0ibyy6bptn1" path="res://sounds/click-1.wav" id="10_r7lbd"]
+[ext_resource type="PackedScene" uid="uid://bqi5hsuddv78n" path="res://scenes/Button.tscn" id="11_u4agf"]
 [ext_resource type="PackedScene" uid="uid://b7m8jvdvtmwrl" path="res://scenes/MenuPanelButton.tscn" id="11_yuoeo"]
+[ext_resource type="Script" path="res://scenes/InventoryGrid.gd" id="12_d0qxx"]
 [ext_resource type="Script" path="res://scripts/VirtualCursor.gd" id="14_wvm1r"]
 [ext_resource type="PackedScene" uid="uid://cfbjagvrd3t1x" path="res://scenes/Player.tscn" id="15_bfq0e"]
 [ext_resource type="PackedScene" uid="uid://bb3yfk7ryftrc" path="res://scenes/ItemName.tscn" id="16_c7aye"]
@@ -485,6 +488,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 columns = 5
+script = ExtResource("10_e1tq7")
 
 [node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/NearbyItemsPanel/VBoxContainer/NearbyItemsPanelBody"]
 modulate = Color(1, 1, 1, 0.113725)
@@ -518,13 +522,13 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = 4
 
-[node name="InteractPanelTitle" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer"]
+[node name="DevPanelTitle" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_t1sl0")
 
-[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/InteractPanelTitle"]
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/DevPanelTitle"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
@@ -532,22 +536,22 @@ theme_override_colors/font_shadow_color = Color(0.145098, 0.145098, 0.145098, 0.
 theme_override_constants/shadow_outline_size = 4
 theme_override_fonts/font = ExtResource("1_cm8g5")
 theme_override_font_sizes/font_size = 14
-text = "   Quick Actions"
+text = "   Developer Panel"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/InteractPanelTitle"]
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/DevPanelTitle"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_8rc5h")
 expand_mode = 1
 
-[node name="InteractPanelBody" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer"]
+[node name="DevPanelBody" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rus3e")
 
-[node name="InteractPanelMargin" type="MarginContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/InteractPanelBody"]
+[node name="DevPanelMargin" type="MarginContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/DevPanelBody"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 8
@@ -555,7 +559,19 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/InteractPanelBody"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/DevPanelBody/DevPanelMargin"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HFlowContainer" type="HFlowContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/DevPanelBody/DevPanelMargin/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/DevPanelBody/DevPanelMargin/ScrollContainer/HFlowContainer" instance=ExtResource("11_u4agf")]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/InteractPanel/VBoxContainer/DevPanelBody"]
 modulate = Color(1, 1, 1, 0.113725)
 layout_mode = 2
 mouse_filter = 2
@@ -675,6 +691,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 columns = 4
+script = ExtResource("12_d0qxx")
 
 [node name="SkillsPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer"]
 unique_name_in_owner = true

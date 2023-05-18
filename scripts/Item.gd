@@ -34,7 +34,9 @@ func use():
 
 
 func move_to_inventory(item):
-	main.player.current_location.items.erase(item)
-	item.get_parent().remove_child(item)
-	main.player.inventory.append(item)
+	var slot = item.get_parent().get_parent()
+	main.player.current_location.location_inv.slots[slot.get_index()].item = null
+	#item.get_parent().remove_child(item)
+	# first empty slot
+	main.add_item_to_first_empty_slot(item.item_resource)
 
