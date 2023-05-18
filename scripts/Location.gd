@@ -7,14 +7,18 @@ var pathfinding_visited = false
 var pathfinding_parent
 var interactables
 var description = "The next area comes into view."
-var items = []
+var location_inv # Generated in _ready()
 
 
 func _ready():
 	if show_labels:
 		$Label.visible = true
 		$Label.text = self.name
-
+	
+	location_inv = InvData.new()
+	for i in range(0,20):
+		location_inv.slots.append(SlotData.new())
+	
 
 func _process(_delta):
 	if check_for_mouse(20):

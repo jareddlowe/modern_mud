@@ -84,9 +84,9 @@ func _location_clicked(clicked_location): # Sets dest.
 			main.get_node("%DisabledVisual").visible = true
 		dist_to_walk = global_position.distance_to(dest.global_position)
 		description_sent = false
-	if is_instance_valid(main.combat_encounter):
-		main.combat_encounter.combat_ended = true
-		main.combat_encounter.queue_free()
+	if is_instance_valid(main.current_event):
+		main.current_event.combat_ended = true
+		main.current_event.queue_free()
 
 
 func _process(delta): # Sets current_location and handles movement.

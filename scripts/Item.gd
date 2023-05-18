@@ -1,7 +1,7 @@
 extends TextureRect
 class_name GameItem
 
-@export var item_resource : Resource
+@export var item_resource : ItemData
 var item_name : String
 var use_function : Callable
 @onready var main = get_tree().get_current_scene()
@@ -26,16 +26,17 @@ func _input(event):
 				elif get_parent().get_parent() in main.get_node("%NearbyItemsGrid").get_children():
 					move_to_inventory(self)
 
+
 func use():
 	if type == "Buriable":
 		queue_free()
-		#main.player.inventory.erase(self)
+		#main.player_inv_res.slots
 
 
 func move_to_inventory(item):
-	main.player.current_location.items.erase(item)
-	item.get_parent().remove_child(item)
-	main.player.inventory.append(item)
-
-
+	var slot = item.get_parent().get_parent()
+	main.player.current_location.location_inv.slots[slot.get_index()].item = null
+	#item.get_parent().remove_child(item)
+	# first empty slot
+	main.add_item_to_first_empty_slot(item.item_resource)
 

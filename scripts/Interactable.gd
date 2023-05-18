@@ -12,7 +12,7 @@ func _ready():
 
 
 func _on_interactable_pressed():
-	if type == "enemy" and !main.combat_encounter:
+	if type == "enemy" and !main.current_event:
 		print("Starting combat!")
 		var new_combat = load("res://scenes/CombatEncounter.tscn").instantiate()
 		new_combat.enemy = associated_object

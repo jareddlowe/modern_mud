@@ -2,7 +2,6 @@ extends Button
 
 signal item_right_clicked(item)
 signal item_dragged(item, slot)
-signal item_dropped(slot)
 var item_id
 var mouse_pressed
 var last_parent
@@ -40,7 +39,7 @@ func _on_item_slot_button_down():
 
 
 func _on_item_slot_mouse_exited():
-	if mouse_pressed and get_child(0).get_children().size() > 0:
+	if mouse_pressed and has_item():
 		var item = get_child(0).get_child(0)
 		emit_signal("item_dragged", item, self)
 	# Reset

@@ -10,7 +10,7 @@ extends PanelContainer
 @onready var nav_buttons = $%ButtonHBoxContainer
 @onready var skills_panel = $%SkillsPanel
 @onready var entity_panel_slots = $%EntityPanelHFlow
-var combat_encounter # Active/current combat encounter
+var current_event # Active/current combat encounter or chat
 var message_panel_flash = false
 var counter = 0
 var previous_message
@@ -18,7 +18,9 @@ var rc_menu
 var last_picked_slot
 var picked_item
 var no_interactables_mode = false
-
+var player_inv_res = load("res://resources/player_inv.tres")
+var nearby_items_res = load("res://resources/nearby_items.tres")
+var last_picked_slot_inventory
 
 func _ready():
 	DisplayServer.window_set_min_size(Vector2(886, 800))
@@ -27,148 +29,142 @@ func _ready():
 		nav_buttons.get_node("ItemsButton").connected_panel = inventory_panel
 		nav_buttons.get_node("SkillsButton").connected_panel = skills_panel
 	
-	var sword = load("res://scenes/Item.tscn").instantiate()
-	sword.item_resource = load("res://resources/Sword.tres")
-	level.find_child("Village Square").items.append(sword)
+	# Add visual slot scenes
+	for slot in player_inv_res.slots:
+		var new_slot = load("res://scenes/ItemSlot.tscn").instantiate()
+		$%InventoryGrid.add_child(new_slot)
 	
-	var sword2 = load("res://scenes/Item.tscn").instantiate()
-	sword2.item_resource = load("res://resources/Sword.tres")
-	player.inventory.append(sword2)
-	
+	for slot_data in nearby_items_res.slots:
+		var new_slot = load("res://scenes/ItemSlot.tscn").instantiate()
+		$%NearbyItemsGrid.add_child(new_slot)
+		new_slot.modulate = Color(1.1, 1.1, 1.1)
 	
 	for i in get_node("%InventoryGrid").get_children():
 		i.connect("item_right_clicked", create_right_click_menu)
 		i.connect("item_dragged", _item_dragged)
-		i.connect("item_dropped", _item_dropped)
 	
 	for i in get_node("%NearbyItemsGrid").get_children():
 		i.connect("item_right_clicked", create_right_click_menu)
 		i.connect("item_dragged", _item_dragged)
-		i.connect("item_dropped", _item_dropped)
-
+	
+	add_item_to_first_empty_slot(load("res://resources/items/Sword.tres"))
+	await get_tree().create_timer(2.0).timeout
+	add_item_to_first_empty_slot(load("res://resources/items/Potion.tres"))
+	await get_tree().create_timer(1.0).timeout
+	add_item_to_first_empty_slot(load("res://resources/items/Potion.tres"))
+	await get_tree().create_timer(1.0).timeout
+	add_item_to_first_empty_slot(load("res://resources/items/Sword.tres"))
 
 
 func _process(delta):
-	erase_right_click_menu_if_mouse_is_far_enough()
-	if not no_interactables_mode and counter < 0.1:
+	#erase_right_click_menu_if_mouse_is_far_enough()
+	if not no_interactables_mode and counter < 0.05:
 		counter += 1 * delta
 	elif not no_interactables_mode:
 		update_interactables(player.current_location)
-		populate_items_in_inventory()
+		update_inventories()
 		populate_items_in_location(player.current_location)
 		counter = 0
 
 
 func _input(event):
-	var slot_list
-	# Here we 'forget' to add the NearbyItemsGrid when player is moving,
-	# to prevent the player from dropping items while moving between locations.
-	if player.stopped:
-		slot_list = get_node("%InventoryGrid").get_children()
-		slot_list += get_node("%NearbyItemsGrid").get_children()
-	else:
-		slot_list = get_node("%InventoryGrid").get_children()
+	if not event is InputEventMouseButton:
+		return
 	
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-	# Deposit any dragged item into the closest slot.
-		if !picked_item or event.pressed:
-			return
-		var current_slot
-		for slot in slot_list:
-			if check_if_mouse_above(slot):
-				current_slot = slot
-		if current_slot == null:
-			var closest_slot
-			var last_dist = 10000
-			for slot in slot_list:
-				var dist
-				var mouse_pos = get_global_mouse_position()
-				dist = mouse_pos.distance_to(slot.global_position)
-				if dist < last_dist:
-					last_dist = dist
-					closest_slot = slot
-			if closest_slot.has_item():
-				var old_item = closest_slot.get_item()
-				old_item.get_parent().remove_child(old_item)
-				last_picked_slot.add_item(old_item)
-				if last_picked_slot in get_node("%NearbyItemsGrid").get_children():
-					if old_item not in player.current_location.items:
-						player.current_location.items.append(old_item)
-				elif last_picked_slot in get_node("%InventoryGrid").get_children():
-					if old_item not in player.inventory:
-						player.inventory.append(old_item)
-				$VirtualCursor.remove_child(picked_item)
-				closest_slot.add_item(picked_item)
-				if closest_slot in get_node("%NearbyItemsGrid").get_children():
-					if picked_item not in player.current_location.items:
-						player.current_location.items.append(picked_item)
-				elif closest_slot in get_node("%InventoryGrid").get_children():
-					if picked_item not in player.inventory:
-						player.inventory.append(picked_item)
-				picked_item.modulate.a = 1.0
-			else:
-				picked_item.get_parent().remove_child(picked_item)
-				closest_slot.add_item(picked_item)
-				if closest_slot in get_node("%NearbyItemsGrid").get_children():
-					if picked_item not in player.current_location.items:
-						player.current_location.items.append(picked_item)
-				elif closest_slot in get_node("%InventoryGrid").get_children():
-					if picked_item not in player.inventory:
-						player.inventory.append(picked_item)
-				picked_item.modulate.a = 1.0
-			picked_item = null
-		else:
-			current_slot.emit_signal("item_dropped", current_slot)
+	if event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
+		if is_instance_valid(picked_item): # Get closest slot
+			var slot_list = []
+			for i in $%InventoryGrid.get_children():
+				slot_list.append(i)
+			for i in $%NearbyItemsGrid.get_children():
+				slot_list.append(i)
+			var closest_slot = get_closest_node(slot_list, Vector2(25,25))
+			var existing_item
+			var inventory
+			var closest_slot_inventory
+			
+			if closest_slot in $%NearbyItemsGrid.get_children():
+				existing_item = player.current_location.location_inv.slots[closest_slot.get_index()].item
+				closest_slot_inventory = player.current_location.location_inv
+			elif closest_slot in $%InventoryGrid.get_children():
+				existing_item = player_inv_res.slots[closest_slot.get_index()].item
+				closest_slot_inventory = player_inv_res
+			
+			if existing_item: # Swap
+				closest_slot_inventory.slots[closest_slot.get_index()].item = picked_item.item_resource
+				picked_item.queue_free()
+				last_picked_slot_inventory.slots[last_picked_slot.get_index()].item = existing_item
+				last_picked_slot = null
+			else: # Drop
+				closest_slot_inventory.slots[closest_slot.get_index()].item = picked_item.item_resource
+				picked_item.queue_free()
+				last_picked_slot = null
+
+
+func get_closest_node(node_list, offset):
+	var dist = 99999
+	var closest_node
+	var mouse_pos = get_global_mouse_position()
+	for node in node_list:
+		var pos = node.global_position + offset
+		var new_dist = pos.distance_to(mouse_pos)
+		if new_dist < dist:
+			dist = new_dist
+			closest_node = node
+	return closest_node
 
 
 func _item_dragged(item, slot):
-	if not picked_item:
-		item.get_parent().remove_child(item)
-		# Here we check if item was dragged out of NearbyItemsGrid, because 
-		# we must remove the item from the location's item list.
-		if slot in get_node("%NearbyItemsGrid").get_children():
-			player.current_location.items.erase(item)
-		elif slot in get_node("%InventoryGrid").get_children():
-			player.inventory.erase(item)
-		$VirtualCursor.add_child(item)
-		item.modulate.a = 0.2
-		last_picked_slot = slot
-		picked_item = item
+	last_picked_slot = slot
+	
+	if slot.get_parent().name == "InventoryGrid":
+		slot.get_parent().resource.slots[slot.get_index()].item = null
+		last_picked_slot_inventory = slot.get_parent().resource
+	else:
+		# If dragged out of nearbyitems:
+		player.current_location.location_inv.slots[slot.get_index()].item = null
+		last_picked_slot_inventory = player.current_location.location_inv
+	item.get_parent().remove_child(item)
+	$VirtualCursor.add_child(item)
+	picked_item = item
+	
 
 
-func _item_dropped(slot):
-	if picked_item:
-		if !slot.has_item(): # Drop item
-			$VirtualCursor.remove_child(picked_item)
-			slot.add_item(picked_item)
-			if slot in get_node("%NearbyItemsGrid").get_children():
-				if picked_item not in player.current_location.items:
-					player.current_location.items.append(picked_item)
-			elif slot in get_node("%InventoryGrid").get_children():
-				if picked_item not in player.inventory:
-					player.inventory.append(picked_item)
-			picked_item.modulate.a = 1
-			picked_item = null
-		else: # Swap items
-			var slot_item = slot.get_item()
-			slot_item.get_parent().remove_child(slot_item)
-			last_picked_slot.add_item(slot_item)
-			if last_picked_slot in get_node("%NearbyItemsGrid").get_children():
-				if slot_item not in player.current_location.items:
-					player.current_location.items.append(slot_item)
-			elif last_picked_slot in get_node("%InventoryGrid").get_children():
-				if slot_item not in player.inventory:
-					player.inventory.append(slot_item)
-			$VirtualCursor.remove_child(picked_item)
-			slot.add_item(picked_item)
-			if slot in get_node("%NearbyItemsGrid").get_children():
-				if picked_item not in player.current_location.items:
-					player.current_location.items.append(picked_item)
-			if slot in get_node("%InventoryGrid").get_children():
-				if picked_item not in player.inventory:
-					player.inventory.append(picked_item)
-			picked_item.modulate.a = 1
-			picked_item = null
+func add_item_to_first_empty_slot(item):
+	var empty_slots
+	var index = 0
+	for slot in player_inv_res.slots:
+		if slot.item == null:
+			if not $%InventoryGrid.get_child(index) == last_picked_slot:
+				slot.item = item
+				break
+		index += 1
+
+
+func update_inventories():
+	var index = 0
+	for slot in $%InventoryGrid.get_children():
+		if player_inv_res.slots[index].item == null:
+			slot.remove_item_from_slot()
+		else:
+			if slot.has_item():
+				slot.remove_item_from_slot()
+			var new_item = load("res://scenes/Item.tscn").instantiate()
+			new_item.item_resource = player_inv_res.slots[index].item
+			slot.add_item(new_item)
+		index += 1
+
+	index = 0
+	for slot in $%NearbyItemsGrid.get_children():
+		if player.current_location.location_inv.slots[index].item == null:
+			slot.remove_item_from_slot()
+		else:
+			if slot.has_item():
+				slot.remove_item_from_slot()
+			var new_item = load("res://scenes/Item.tscn").instantiate()
+			new_item.item_resource = player.current_location.location_inv.slots[index].item
+			slot.add_item(new_item)
+		index += 1
 
 
 func add_message(text, sound=""):
@@ -236,23 +232,8 @@ func populate_items_in_location(given_location):
 	for slot in slots:
 		if !slot.has_item():
 			empty_slots.append(slot)
-	for item in given_location.items:
-		if not is_instance_valid(item.get_parent()): # If item has no slot
-			var slot = empty_slots.pop_front()
-			slot.add_item(item)
-
-
-func populate_items_in_inventory():
-	var slots = get_node("%InventoryGrid").get_children()
-	var empty_slots = []
-	for slot in slots:
-		if !slot.has_item():
-			empty_slots.append(slot)
-	for item in player.inventory:
-		if is_instance_valid(item):
-			if not is_instance_valid(item.get_parent()): # If item has no slot
-				var slot = empty_slots.pop_front()
-				slot.add_item(item)
+	for item in given_location.location_inv.slots:
+		pass
 
 
 func create_right_click_menu(_node):
@@ -275,7 +256,6 @@ func erase_right_click_menu_if_mouse_is_far_enough():
 
 
 func check_if_mouse_above(i):
-	# Todo: check if this panel is active
 	var pos = get_global_mouse_position()
 	if pos.x > i.global_position.x and pos.x < i.global_position.x + i.size.x:
 		if pos.y > i.global_position.y and pos.y < i.global_position.y + i.size.y:

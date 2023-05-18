@@ -11,7 +11,7 @@ var winner : String
 # There is only meant to be one of these scenes "active" at a time.
 
 func _ready():
-	main.combat_encounter = self # This ensures only one is active at a time.
+	main.current_event = self # This ensures only one is active at a time.
 	$PlayerAttackTimer.wait_time = player.attack_speed
 	$EnemyAttackTimer.wait_time = enemy.attack_speed
 	$PlayerBox/Label.text = player.name
@@ -42,9 +42,9 @@ func roll_for_item_drops(given_enemy):
 		var r = randf_range(0.0000,1.0000)
 		if r >= 0.0 and r <= given_enemy.drop_table[item]:
 			var new_item = load("res://scenes/Item.tscn").instantiate()
-			new_item.item_resource = load("res://resources/" + item + ".tres")
-			player.current_location.items.append(new_item)
-			main.populate_items_in_location(player.current_location)
+			new_item.item_resource = load("res://resources/items/" + item + ".tres")
+			#player.current_location.items.append(new_item)
+			#main.populate_items_in_location(player.current_location)
 
 
 func _on_enemy_attack_timer_timeout():
