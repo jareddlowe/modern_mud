@@ -31,7 +31,7 @@ func _input(event):
 		elif closest_slot in $%InventoryGrid.get_children():
 			existing_item = player_inv_res.slots[closest_slot.get_index()].item
 			closest_slot_inventory = player_inv_res
-		
+		# Handle swapping and dropping of items
 		if existing_item: # Swap
 			closest_slot_inventory.slots[closest_slot.get_index()].item = picked_item.resource
 			picked_item.queue_free()
@@ -45,7 +45,6 @@ func _input(event):
 
 func _item_dragged(item, slot):
 	last_picked_slot = slot
-	print('ye2')
 	if slot.get_parent().name == "InventoryGrid":
 		slot.get_parent().resource.slots[slot.get_index()].item = null
 		last_picked_slot_inventory = slot.get_parent().resource
