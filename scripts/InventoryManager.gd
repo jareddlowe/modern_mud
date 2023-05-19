@@ -37,10 +37,12 @@ func _input(event):
 			picked_item.queue_free()
 			last_picked_slot_inventory.slots[last_picked_slot.get_index()].item = existing_item
 			last_picked_slot = null
+			picked_item = null
 		else: # Drop
 			closest_slot_inventory.slots[closest_slot.get_index()].item = picked_item.resource
 			picked_item.queue_free()
 			last_picked_slot = null
+			picked_item = null
 
 
 func _item_dragged(item, slot):

@@ -21,7 +21,6 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and !event.pressed:
-		
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if main.check_if_mouse_above(self) and not inv_manager.picked_item:
 				if slot in main.get_node("%InventoryGrid").get_children():
@@ -32,9 +31,7 @@ func _input(event):
 
 func use():
 	if type == "Buriable":
-		#queue_free()
-		#main.player_inv_res.slots
-		pass
+		main.player.inventory.slots[slot.get_index()].item = null
 
 
 func move_to_inventory(item):
