@@ -2,10 +2,11 @@ extends TextureRect
 class_name GameItem
 
 @export var resource : ItemData
-var item_name : String
-var use_function : Callable
 @onready var main = get_tree().get_current_scene()
 @onready var inv_manager = main.get_node("InventoryManager")
+@onready var slot = get_parent().get_parent()
+var item_name : String
+var use_function : Callable
 var type
 
 
@@ -20,11 +21,12 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and !event.pressed:
+		
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if main.check_if_mouse_above(self) and not inv_manager.picked_item:
-				if get_parent().get_parent() in main.get_node("%InventoryGrid").get_children():
+				if slot in main.get_node("%InventoryGrid").get_children():
 					use()
-				elif get_parent().get_parent() in main.get_node("%NearbyItemsGrid").get_children():
+				elif slot in main.get_node("%NearbyItemsGrid").get_children():
 					move_to_inventory(self)
 
 
@@ -36,7 +38,7 @@ func use():
 
 
 func move_to_inventory(item):
-	var slot = item.get_parent().get_parent()
+	var slot = item.slot
 	main.player.location.inventory.slots[slot.get_index()].item = null
 	#item.get_parent().remove_child(item)
 	# first empty slot

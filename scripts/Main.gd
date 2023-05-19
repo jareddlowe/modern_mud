@@ -52,7 +52,6 @@ func _ready():
 
 
 func _process(delta):
-	#erase_right_click_menu_if_mouse_is_far_enough()
 	if not no_interactables_mode and counter < 0.05:
 		counter += 1 * delta
 	elif not no_interactables_mode:
@@ -111,25 +110,6 @@ func update_interactables(given_location):
 func clear_interactables():
 	for i in entity_panel_slots.get_children():
 		i.queue_free()
-
-
-func create_right_click_menu(_node):
-	if rc_menu:
-		rc_menu.queue_free()
-		rc_menu = null
-	rc_menu = load("res://scenes/RightClickMenu.tscn").instantiate()
-	$VirtualCursor.add_child(rc_menu)
-	rc_menu.global_position = get_global_mouse_position()
-
-
-func erase_right_click_menu_if_mouse_is_far_enough():
-	if rc_menu:
-		var mouse_pos = get_global_mouse_position()
-		var menu_pos = rc_menu.global_position
-		var panel = rc_menu.get_node("PanelContainer")
-		if mouse_pos.distance_to(menu_pos + panel.size / 2) > 70:
-			rc_menu.queue_free()
-			rc_menu = null
 
 
 func check_if_mouse_above(i):
