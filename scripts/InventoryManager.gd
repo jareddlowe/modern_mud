@@ -9,7 +9,12 @@ var last_picked_slot
 var picked_item
 
 
+func _process(_delta):
+	erase_right_click_menu_if_mouse_is_far_enough()
+
+
 func _input(event):
+	# Handle dropping of items into closest slot
 	if not event is InputEventMouseButton:
 		return
 	if event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
@@ -31,26 +36,27 @@ func _input(event):
 		elif closest_slot in $%InventoryGrid.get_children():
 			existing_item = player_inv_res.slots[closest_slot.get_index()].item
 			closest_slot_inventory = player_inv_res
-		
+		# Handle swapping and dropping of items
 		if existing_item: # Swap
 			closest_slot_inventory.slots[closest_slot.get_index()].item = picked_item.resource
 			picked_item.queue_free()
 			last_picked_slot_inventory.slots[last_picked_slot.get_index()].item = existing_item
 			last_picked_slot = null
+			picked_item = null
 		else: # Drop
 			closest_slot_inventory.slots[closest_slot.get_index()].item = picked_item.resource
 			picked_item.queue_free()
 			last_picked_slot = null
+			picked_item = null
 
 
 func _item_dragged(item, slot):
 	last_picked_slot = slot
-	print('ye2')
 	if slot.get_parent().name == "InventoryGrid":
 		slot.get_parent().resource.slots[slot.get_index()].item = null
 		last_picked_slot_inventory = slot.get_parent().resource
 	else:
-		# If dragged out of nearbyitems:
+		# If dragged out of nearby items grid:
 		player.location.inventory.slots[slot.get_index()].item = null
 		last_picked_slot_inventory = player.location.inventory
 	item.get_parent().remove_child(item)
@@ -86,37 +92,47 @@ func clear_nearby_items():
 			item.get_parent().remove_child(item)
 
 
-func populate_items_in_location(given_location):
-	var slots = get_node("%NearbyItemsGrid").get_children()
-	var empty_slots = []
-	for slot in slots:
-		if !slot.has_item():
-			empty_slots.append(slot)
-	for item in given_location.inventory.slots:
-		pass
-
-
 func update_inventories():
-	var index = 0
+	# Update inventory grid
 	for slot in main.get_node("%InventoryGrid").get_children():
-		if player_inv_res.slots[index].item == null:
-			slot.remove_item_from_slot()
-		else:
-			if slot.has_item():
+		if slot.has_item():
+			if player.inventory.slots[slot.get_index()].item:
+				if player.inventory.slots[slot.get_index()].item != slot.get_item().resource:
+					slot.remove_item_from_slot()
+					var new_item = load("res://scenes/Item.tscn").instantiate()
+					new_item.resource = player.inventory.slots[slot.get_index()].item
+					slot.add_item(new_item)
+			else:
 				slot.remove_item_from_slot()
-			var new_item = load("res://scenes/Item.tscn").instantiate()
-			new_item.resource = player_inv_res.slots[index].item
-			slot.add_item(new_item)
-		index += 1
-
-	index = 0
+		else:
+			if player.inventory.slots[slot.get_index()].item != null:
+				var new_item = load("res://scenes/Item.tscn").instantiate()
+				new_item.resource = player.inventory.slots[slot.get_index()].item
+				slot.add_item(new_item)
+	
+	# Update nearby items grid
 	for slot in main.get_node("%NearbyItemsGrid").get_children():
-		if player.location.inventory.slots[index].item == null:
-			slot.remove_item_from_slot()
-		else:
-			if slot.has_item():
+		if slot.has_item():
+			if player.location.inventory.slots[slot.get_index()].item:
+				if player.location.inventory.slots[slot.get_index()].item != slot.get_item().resource:
+					slot.remove_item_from_slot()
+					var new_item = load("res://scenes/Item.tscn").instantiate()
+					new_item.resource = player.location.inventory.slots[slot.get_index()].item
+					slot.add_item(new_item)
+			else:
 				slot.remove_item_from_slot()
-			var new_item = load("res://scenes/Item.tscn").instantiate()
-			new_item.resource = player.location.inventory.slots[index].item
-			slot.add_item(new_item)
-		index += 1
+		else:
+			if player.location.inventory.slots[slot.get_index()].item != null:
+				var new_item = load("res://scenes/Item.tscn").instantiate()
+				new_item.resource = player.location.inventory.slots[slot.get_index()].item
+				slot.add_item(new_item)
+
+
+func erase_right_click_menu_if_mouse_is_far_enough():
+	if is_instance_valid(main.rc_menu):
+		var mouse_pos = get_global_mouse_position()
+		var menu_pos = main.rc_menu.global_position
+		var panel = main.rc_menu.get_node("PanelContainer")
+		if mouse_pos.distance_to(menu_pos + panel.size / 2) > 70:
+			main.rc_menu.queue_free()
+			main.rc_menu = null

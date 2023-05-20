@@ -9,5 +9,5 @@ var attack_speed = 2.6
 var strength = 2
 var drop_table = {
 	"Bones": 1.0,
-	"Sword": 0.5
+	"Sword": 0.1
 	}

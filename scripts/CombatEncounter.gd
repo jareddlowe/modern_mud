@@ -44,7 +44,6 @@ func roll_for_item_drops(given_enemy):
 		if r >= 0.0 and r <= given_enemy.drop_table[item]:
 			var res = load("res://resources/items/" + item + ".tres")
 			inv_manager.add_item(res, player.location.inventory)
-			#player.current_location.items.append(new_item)
 
 
 func _on_enemy_attack_timer_timeout():

@@ -17,7 +17,6 @@ var counter = 0
 var previous_message
 var rc_menu
 var no_interactables_mode = false
-var player_inv_res = load("res://resources/player_inv.tres")
 var nearby_items_res = load("res://resources/nearby_items.tres")
 
 
@@ -30,7 +29,7 @@ func _ready():
 		nav_buttons.get_node("ItemsButton").connected_panel = inventory_panel
 		nav_buttons.get_node("SkillsButton").connected_panel = skills_panel
 	# Instantiate visual slot node for every slot in inventory resource.
-	for slot in player_inv_res.slots:
+	for slot in player.inventory.slots:
 		var new_slot = load("res://scenes/ItemSlot.tscn").instantiate()
 		$%InventoryGrid.add_child(new_slot)
 	# Instantiate visual slot node for every slot in nearby_items resource.
@@ -47,18 +46,16 @@ func _ready():
 	# Add some example items to the inventory.
 	var sword = load("res://resources/items/Sword.tres")
 	var potion = load("res://resources/items/Potion.tres")
-	inv_manager.add_item(sword, player_inv_res)
-	inv_manager.add_item(potion, player_inv_res)
+	inv_manager.add_item(sword, player.inventory)
+	inv_manager.add_item(potion, player.inventory)
 
 
 func _process(delta):
-	#erase_right_click_menu_if_mouse_is_far_enough()
 	if not no_interactables_mode and counter < 0.05:
 		counter += 1 * delta
 	elif not no_interactables_mode:
 		update_interactables(player.location)
 		inv_manager.update_inventories()
-		inv_manager.populate_items_in_location(player.location)
 		counter = 0
 
 
@@ -111,25 +108,6 @@ func update_interactables(given_location):
 func clear_interactables():
 	for i in entity_panel_slots.get_children():
 		i.queue_free()
-
-
-func create_right_click_menu(_node):
-	if rc_menu:
-		rc_menu.queue_free()
-		rc_menu = null
-	rc_menu = load("res://scenes/RightClickMenu.tscn").instantiate()
-	$VirtualCursor.add_child(rc_menu)
-	rc_menu.global_position = get_global_mouse_position()
-
-
-func erase_right_click_menu_if_mouse_is_far_enough():
-	if rc_menu:
-		var mouse_pos = get_global_mouse_position()
-		var menu_pos = rc_menu.global_position
-		var panel = rc_menu.get_node("PanelContainer")
-		if mouse_pos.distance_to(menu_pos + panel.size / 2) > 70:
-			rc_menu.queue_free()
-			rc_menu = null
 
 
 func check_if_mouse_above(i):
