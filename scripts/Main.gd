@@ -17,7 +17,6 @@ var counter = 0
 var previous_message
 var rc_menu
 var no_interactables_mode = false
-var player_inv_res = load("res://resources/player_inv.tres")
 var nearby_items_res = load("res://resources/nearby_items.tres")
 
 
@@ -30,7 +29,7 @@ func _ready():
 		nav_buttons.get_node("ItemsButton").connected_panel = inventory_panel
 		nav_buttons.get_node("SkillsButton").connected_panel = skills_panel
 	# Instantiate visual slot node for every slot in inventory resource.
-	for slot in player_inv_res.slots:
+	for slot in player.inventory.slots:
 		var new_slot = load("res://scenes/ItemSlot.tscn").instantiate()
 		$%InventoryGrid.add_child(new_slot)
 	# Instantiate visual slot node for every slot in nearby_items resource.
@@ -47,8 +46,8 @@ func _ready():
 	# Add some example items to the inventory.
 	var sword = load("res://resources/items/Sword.tres")
 	var potion = load("res://resources/items/Potion.tres")
-	inv_manager.add_item(sword, player_inv_res)
-	inv_manager.add_item(potion, player_inv_res)
+	inv_manager.add_item(sword, player.inventory)
+	inv_manager.add_item(potion, player.inventory)
 
 
 func _process(delta):
@@ -57,7 +56,6 @@ func _process(delta):
 	elif not no_interactables_mode:
 		update_interactables(player.location)
 		inv_manager.update_inventories()
-		#inv_manager.populate_items_in_location(player.location)
 		counter = 0
 
 
