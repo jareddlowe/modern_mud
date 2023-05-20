@@ -27,7 +27,7 @@ func _input(event):
 				if slot in main.get_node("%InventoryGrid").get_children():
 					use()
 				elif slot in main.get_node("%NearbyItemsGrid").get_children():
-					move_to_inventory()
+					take()
 	
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
@@ -41,23 +41,21 @@ func _input(event):
 				main.add_child(new_menu)
 				if slot in main.get_node("%InventoryGrid").get_children():
 					# Add a drop button and connect its pressed signal to our drop function 
-					var new_button = load("res://scenes/RightClickMenuButton.tscn").instantiate()
-					new_button.text = "Drop"
-					new_button.pressed.connect(drop)
-					new_menu.get_node("PanelContainer/VBoxContainer").add_child(new_button)
-					
+					var drop_button = load("res://scenes/RightClickMenuButton.tscn").instantiate()
+					drop_button.text = "Drop"
+					drop_button.pressed.connect(drop)
+					new_menu.get_node("PanelContainer/VBoxContainer").add_child(drop_button)
 				if slot in main.get_node("%NearbyItemsGrid").get_children():
 					# Add a take button and connect its pressed signal to our take function
-					var new_button = load("res://scenes/RightClickMenuButton.tscn").instantiate()
-					new_button.text = "Take"
-					new_button.pressed.connect(take)
-					new_menu.get_node("PanelContainer/VBoxContainer").add_child(new_button)
-					
-				# Add a cancel button
-				var new_button = load("res://scenes/RightClickMenuButton.tscn").instantiate()
-				new_button.text = "Cancel"
-				new_button.pressed.connect(cancel)
-				new_menu.get_node("PanelContainer/VBoxContainer").add_child(new_button)
+					var take_button = load("res://scenes/RightClickMenuButton.tscn").instantiate()
+					take_button.text = "Take"
+					take_button.pressed.connect(take)
+					new_menu.get_node("PanelContainer/VBoxContainer").add_child(take_button)
+				# Add a cancel button and connect its pressed signal to our cancel function
+				var cancel_button = load("res://scenes/RightClickMenuButton.tscn").instantiate()
+				cancel_button.text = "Cancel"
+				cancel_button.pressed.connect(cancel)
+				new_menu.get_node("PanelContainer/VBoxContainer").add_child(cancel_button)
 
 
 func use():
@@ -75,10 +73,6 @@ func drop():
 func take():
 	if main.rc_menu:
 		main.rc_menu.queue_free()
-	move_to_inventory()
-
-
-func move_to_inventory():
 	var item = main.player.location.inventory.slots[slot.get_index()].item
 	main.player.location.inventory.slots[slot.get_index()].item = null
 	inv_manager.add_item(item, main.player.inventory)
