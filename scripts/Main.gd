@@ -57,7 +57,7 @@ func _process(delta):
 	elif not no_interactables_mode:
 		update_interactables(player.location)
 		inv_manager.update_inventories()
-		inv_manager.populate_items_in_location(player.location)
+		#inv_manager.populate_items_in_location(player.location)
 		counter = 0
 
 

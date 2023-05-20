@@ -18,7 +18,8 @@ func add_item(item_node):
 
 
 func get_item():
-	return get_child(0).get_child(0)
+	if is_instance_valid(get_child(0).get_child(0)):
+		return get_child(0).get_child(0)
 
 
 func has_item():

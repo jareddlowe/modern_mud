@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.0")
 boot_splash/bg_color=Color(0.152941, 0.152941, 0.152941, 1)
 config/icon="res://images/icon.png"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/size/viewport_width=886
