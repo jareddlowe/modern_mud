@@ -59,6 +59,8 @@ func _input(event):
 
 
 func use():
+	if main.rc_menu:
+		main.rc_menu.queue_free()
 	if type == "Buriable":
 		main.player.inventory.slots[slot.get_index()].item = null
 
