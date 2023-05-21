@@ -2,7 +2,6 @@ extends Control
 
 @onready var player = get_parent().get_node("%Player")
 @onready var main = get_parent()
-var player_inv_res = load("res://resources/player_inv.tres")
 var nearby_items_res = load("res://resources/nearby_items.tres")
 var last_picked_slot_inventory
 var last_picked_slot
@@ -34,13 +33,13 @@ func _input(event):
 			existing_item = player.location.inventory.slots[closest_slot.get_index()].item
 			closest_slot_inventory = player.location.inventory
 		elif closest_slot in $%InventoryGrid.get_children():
-			existing_item = player_inv_res.slots[closest_slot.get_index()].item
-			closest_slot_inventory = player_inv_res
+			existing_item = player.inventory.slots[closest_slot.get_index()].item
+			closest_slot_inventory = player.inventory
 		# Handle swapping and dropping of items
 		if existing_item: # Swap
 			closest_slot_inventory.slots[closest_slot.get_index()].item = picked_item.resource
-			picked_item.queue_free()
 			last_picked_slot_inventory.slots[last_picked_slot.get_index()].item = existing_item
+			picked_item.queue_free()
 			last_picked_slot = null
 			picked_item = null
 		else: # Drop
