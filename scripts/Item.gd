@@ -29,6 +29,7 @@ func _input(event):
 				elif slot in main.get_node("%NearbyItemsGrid").get_children():
 					take()
 	
+	
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if main.check_if_mouse_above(self) and not inv_manager.picked_item:
@@ -59,21 +60,21 @@ func _input(event):
 
 
 func use():
-	if main.rc_menu:
+	if is_instance_valid(main.rc_menu):
 		main.rc_menu.queue_free()
 	if type == "Buriable":
 		main.player.inventory.slots[slot.get_index()].item = null
 
 
 func drop():
-	if main.rc_menu:
+	if is_instance_valid(main.rc_menu):
 		main.rc_menu.queue_free()
 	inv_manager.add_item(resource, main.player.location.inventory)
 	main.player.inventory.slots[slot.get_index()].item = null
 
 
 func take():
-	if main.rc_menu:
+	if is_instance_valid(main.rc_menu):
 		main.rc_menu.queue_free()
 	var item = main.player.location.inventory.slots[slot.get_index()].item
 	main.player.location.inventory.slots[slot.get_index()].item = null
@@ -81,5 +82,5 @@ func take():
 
 
 func cancel():
-	if main.rc_menu:
+	if is_instance_valid(main.rc_menu):
 		main.rc_menu.queue_free()

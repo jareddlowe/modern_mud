@@ -2,7 +2,6 @@ extends Control
 
 @onready var player = get_parent().get_node("%Player")
 @onready var main = get_parent()
-var player_inv_res = load("res://resources/player_inv.tres")
 var nearby_items_res = load("res://resources/nearby_items.tres")
 var last_picked_slot_inventory
 var last_picked_slot
@@ -34,10 +33,11 @@ func _input(event):
 			existing_item = player.location.inventory.slots[closest_slot.get_index()].item
 			closest_slot_inventory = player.location.inventory
 		elif closest_slot in $%InventoryGrid.get_children():
-			existing_item = player_inv_res.slots[closest_slot.get_index()].item
-			closest_slot_inventory = player_inv_res
+			existing_item = player.inventory.slots[closest_slot.get_index()].item
+			closest_slot_inventory = player.inventory
 		# Handle swapping and dropping of items
 		if existing_item: # Swap
+			print("Swapping")
 			closest_slot_inventory.slots[closest_slot.get_index()].item = picked_item.resource
 			picked_item.queue_free()
 			last_picked_slot_inventory.slots[last_picked_slot.get_index()].item = existing_item
@@ -48,13 +48,14 @@ func _input(event):
 			picked_item.queue_free()
 			last_picked_slot = null
 			picked_item = null
+		get_viewport().set_input_as_handled() # Item will take upon swapping unless we do this
 
 
 func _item_dragged(item, slot):
 	last_picked_slot = slot
 	if slot.get_parent().name == "InventoryGrid":
 		slot.get_parent().resource.slots[slot.get_index()].item = null
-		last_picked_slot_inventory = slot.get_parent().resource
+		last_picked_slot_inventory = player.inventory
 	else:
 		# If dragged out of nearby items grid:
 		player.location.inventory.slots[slot.get_index()].item = null
