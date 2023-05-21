@@ -37,9 +37,10 @@ func _input(event):
 			closest_slot_inventory = player.inventory
 		# Handle swapping and dropping of items
 		if existing_item: # Swap
+			print("Swapping")
 			closest_slot_inventory.slots[closest_slot.get_index()].item = picked_item.resource
-			last_picked_slot_inventory.slots[last_picked_slot.get_index()].item = existing_item
 			picked_item.queue_free()
+			last_picked_slot_inventory.slots[last_picked_slot.get_index()].item = existing_item
 			last_picked_slot = null
 			picked_item = null
 		else: # Drop
@@ -47,13 +48,14 @@ func _input(event):
 			picked_item.queue_free()
 			last_picked_slot = null
 			picked_item = null
+		get_viewport().set_input_as_handled() # Item will take upon swapping unless we do this
 
 
 func _item_dragged(item, slot):
 	last_picked_slot = slot
 	if slot.get_parent().name == "InventoryGrid":
 		slot.get_parent().resource.slots[slot.get_index()].item = null
-		last_picked_slot_inventory = slot.get_parent().resource
+		last_picked_slot_inventory = player.inventory
 	else:
 		# If dragged out of nearby items grid:
 		player.location.inventory.slots[slot.get_index()].item = null

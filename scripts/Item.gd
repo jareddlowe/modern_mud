@@ -29,6 +29,7 @@ func _input(event):
 				elif slot in main.get_node("%NearbyItemsGrid").get_children():
 					take()
 	
+	
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if main.check_if_mouse_above(self) and not inv_manager.picked_item:
