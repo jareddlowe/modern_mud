@@ -7,6 +7,14 @@ var last_picked_slot_inventory
 var last_picked_slot
 var picked_item
 
+# How the inventory system works:
+# The player node has an inventory variable, which is assigned an inventory resource. 
+# (player_inv_res.tres) This is an array of slot resources, which contain item resources.
+# To access the player's inventory items, use player.inventory.slots[slot_index].item
+# We can set these slots to different resources to change the items in the inventory.
+# To access the item resource of a visual item node, use slot.get_item().resource,
+# slot being a slot.tscn child of the visual inventory grid. ($%InventoryGrid)
+
 
 func _process(_delta):
 	erase_right_click_menu_if_mouse_is_far_enough()
@@ -48,7 +56,8 @@ func _input(event):
 			picked_item.queue_free()
 			last_picked_slot = null
 			picked_item = null
-		get_viewport().set_input_as_handled() # Item will take upon swapping unless we do this
+		# Item will be taken upon swapping unless we set input as handled.
+		get_viewport().set_input_as_handled()
 
 
 func _item_dragged(item, slot):
@@ -94,24 +103,29 @@ func clear_nearby_items():
 
 
 func update_inventories():
-	# Update inventory grid
-	for slot in main.get_node("%InventoryGrid").get_children():
-		if slot.has_item():
+	# Update inventory grid.
+	for slot in main.get_node("%InventoryGrid").get_children(): # For each visual slot...
+		if slot.has_item(): # If the slot has an item...
+			# Check if the real inventory has an item in that slot...
 			if player.inventory.slots[slot.get_index()].item:
+				# If it does, check if the visual item is the same as the real item...
 				if player.inventory.slots[slot.get_index()].item != slot.get_item().resource:
+					# If it isn't, replace it with the proper visual item.
 					slot.remove_item_from_slot()
 					var new_item = load("res://scenes/Item.tscn").instantiate()
 					new_item.resource = player.inventory.slots[slot.get_index()].item
 					slot.add_item(new_item)
-			else:
+			else: # If it doesn't, remove the visual item.
 				slot.remove_item_from_slot()
-		else:
+		else: # If the slot has no item... 
+			# Check if the real inventory has an item in that slot...
 			if player.inventory.slots[slot.get_index()].item != null:
+				# If it does, add a new visual item to the slot.
 				var new_item = load("res://scenes/Item.tscn").instantiate()
 				new_item.resource = player.inventory.slots[slot.get_index()].item
 				slot.add_item(new_item)
 	
-	# Update nearby items grid
+	# Update nearby items grid.
 	for slot in main.get_node("%NearbyItemsGrid").get_children():
 		if slot.has_item():
 			if player.location.inventory.slots[slot.get_index()].item:
