@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cmgcqgr6rkif4"]
+[gd_scene load_steps=43 format=3 uid="uid://cmgcqgr6rkif4"]
 
 [ext_resource type="PackedScene" uid="uid://du4n31ytwc0jp" path="res://scenes/Villagetown.tscn" id="1_7askw"]
 [ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_cm8g5"]
@@ -14,12 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://bqi5hsuddv78n" path="res://scenes/Button.tscn" id="11_u4agf"]
 [ext_resource type="PackedScene" uid="uid://b7m8jvdvtmwrl" path="res://scenes/MenuPanelButton.tscn" id="11_yuoeo"]
 [ext_resource type="Script" path="res://scripts/InventoryGrid.gd" id="13_o86in"]
+[ext_resource type="PackedScene" uid="uid://bfdgdc4v81nae" path="res://scenes/ItemSlot.tscn" id="14_pq3mo"]
 [ext_resource type="Script" path="res://scripts/VirtualCursor.gd" id="14_wvm1r"]
 [ext_resource type="PackedScene" uid="uid://cfbjagvrd3t1x" path="res://scenes/Player.tscn" id="15_bfq0e"]
 [ext_resource type="PackedScene" uid="uid://bb3yfk7ryftrc" path="res://scenes/ItemName.tscn" id="16_c7aye"]
 [ext_resource type="Script" path="res://scripts/InventoryManager.gd" id="17_ahktw"]
 [ext_resource type="Script" path="res://scripts/SkillsManager.gd" id="18_ktt1f"]
 [ext_resource type="Script" path="res://scripts/Skill.gd" id="19_cxqy4"]
+[ext_resource type="Script" path="res://scripts/EquipmentManager.gd" id="21_k8fgo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lp5fs"]
 bg_color = Color(0.105882, 0.109804, 0.121569, 1)
@@ -62,6 +64,14 @@ bg_color = Color(0.160784, 0.168627, 0.180392, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_23kym"]
 bg_color = Color(0.121948, 0.130981, 0.144531, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sboyl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a74u6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q4nj3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svn6t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfbvu"]
 bg_color = Color(0.160784, 0.168627, 0.180392, 1)
@@ -631,6 +641,7 @@ button_name = "Quests"
 
 [node name="InventoryPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -695,6 +706,229 @@ size_flags_vertical = 4
 mouse_filter = 2
 columns = 4
 script = ExtResource("13_o86in")
+
+[node name="GearPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r4v8t")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="GearPanelTitle" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1sl0")
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelTitle"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.141176, 0.141176, 0.141176, 1)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("1_cm8g5")
+theme_override_font_sizes/font_size = 14
+text = "   Gear"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelTitle"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_8rc5h")
+expand_mode = 1
+
+[node name="GearPanelBody" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_23kym")
+
+[node name="TextureRect" type="TextureRect" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody"]
+modulate = Color(1, 1, 1, 0.113725)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_543l6")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="GearGrid" type="GridContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+columns = 3
+script = ExtResource("13_o86in")
+
+[node name="_fill0" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sboyl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a74u6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_q4nj3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_svn6t")
+disabled = true
+
+[node name="HeadSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+
+[node name="_fill1" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sboyl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a74u6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_q4nj3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_svn6t")
+disabled = true
+
+[node name="BackSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+
+[node name="ChestSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+
+[node name="NeckSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+
+[node name="WeaponSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+
+[node name="BeltSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+
+[node name="AltWeaponSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+
+[node name="HandSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+
+[node name="LegsSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+
+[node name="RingSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+
+[node name="_fill3" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sboyl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a74u6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_q4nj3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_svn6t")
+disabled = true
+
+[node name="FeetSlot" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+
+[node name="_fill4" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/GearGrid" instance=ExtResource("14_pq3mo")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sboyl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a74u6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_q4nj3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_svn6t")
+disabled = true
+
+[node name="MarginContainer" type="MarginContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TableLabel" type="HBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer/TableLabel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "Physical Defense"
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer/TableLabel"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 12
+text = "1"
+
+[node name="TableLabel2" type="HBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer/TableLabel2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "Fire Resistance"
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer/TableLabel2"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 12
+text = "1"
+
+[node name="TableLabel3" type="HBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer/TableLabel3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "Earth Resistance"
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer/TableLabel3"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 12
+text = "1"
+
+[node name="TableLabel4" type="HBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer/TableLabel4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "Water Resistance"
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer/TableLabel4"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 12
+text = "1"
+
+[node name="TableLabel5" type="HBoxContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer/TableLabel5"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 13
+text = "Air Resistance"
+
+[node name="Label2" type="Label" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer/GearPanel/VBoxContainer/GearPanelBody/VBoxContainer/MarginContainer/VBoxContainer/TableLabel5"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("9_s1pdl")
+theme_override_font_sizes/font_size = 12
+text = "1"
 
 [node name="SkillsPanel" type="PanelContainer" parent="GamePanel/MarginContainer/HBoxContainer/VBoxContainer1/MenuPanel/VBoxContainer"]
 unique_name_in_owner = true
@@ -1547,18 +1781,25 @@ script = ExtResource("14_wvm1r")
 layout_mode = 1
 
 [node name="InventoryManager" type="Control" parent="."]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("17_ahktw")
 
 [node name="SkillsManager" type="Control" parent="."]
 process_priority = 3
+visible = false
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("18_ktt1f")
 
 [node name="Faith" type="Node" parent="SkillsManager"]
 script = ExtResource("19_cxqy4")
+
+[node name="EquipmentManager" type="Control" parent="."]
+visible = false
+layout_mode = 2
+script = ExtResource("21_k8fgo")
 
 [node name="Clicker" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_r7lbd")

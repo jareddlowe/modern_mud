@@ -10,8 +10,9 @@ var picked_item
 # How the inventory system works:
 # The player node has an inventory variable, which is assigned an inventory resource. 
 # (player_inv_res.tres) This is an array of slot resources, which contain item resources.
+# These resources represent data. The slot.tscn and item.tscn represent visual items.
 # To access the player's inventory items, use player.inventory.slots[slot_index].item
-# We can set these slots to different resources to change the items in the inventory.
+# We can set these data slots to different resources to change the items in the inventory.
 # To access the item resource of a visual item node, use slot.get_item().resource,
 # slot being a slot.tscn child of the visual inventory grid. ($%InventoryGrid)
 
@@ -126,6 +127,7 @@ func update_inventories():
 				slot.add_item(new_item)
 	
 	# Update nearby items grid.
+	# Same logic as above, different inventory.
 	for slot in main.get_node("%NearbyItemsGrid").get_children():
 		if slot.has_item():
 			if player.location.inventory.slots[slot.get_index()].item:
