@@ -28,7 +28,6 @@ func has_item():
 
 
 func check_if_mouse_above():
-	# Todo: check if this panel is active
 	var mpos = get_global_mouse_position()
 	if mpos.x > global_position.x and mpos.x < global_position.x + size.x:
 		if mpos.y > global_position.y and mpos.y < global_position.y + size.y:

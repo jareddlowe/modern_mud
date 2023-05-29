@@ -7,7 +7,7 @@ extends Control
 @onready var final_dest = location
 @onready var inv_manager = main.get_node("InventoryManager")
 signal location_changed
-var speed = 100
+var speed = 20
 var description_sent = false
 var dist_to_walk = 0
 var path
@@ -96,13 +96,12 @@ func _process(delta): # Sets location and handles movement.
 	if not stopped:
 		if dist > 0.5 and dist < 5:
 			# 0.05 high speed, 0.005 low speed
-			global_position = global_position.lerp(dest.global_position, 0.05) 
+			global_position = global_position.lerp(dest.global_position, 0.005) 
 		elif dist < 0.5: # Stop, Resetting one-shot variables
 			update_location()
 			if location != final_dest:
 				auto_move()
 			else: # Final stop
-				inv_manager.populate_items_in_location(dest)
 				main.get_node("%DisabledVisual").visible = false
 				main.no_interactables_mode = false
 		elif dist > 5:
@@ -121,7 +120,6 @@ func auto_move():
 		dist_to_walk = global_position.distance_to(dest.global_position)
 		description_sent = false
 		main.get_node("%DisabledVisual").visible = true
-		main.clear_nearby_items()
 
 
 func update_location():

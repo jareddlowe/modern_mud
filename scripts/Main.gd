@@ -4,13 +4,14 @@ extends PanelContainer
 @onready var scroll_cont = $%MessageScrollContainer
 @onready var level = $%SubViewport/Villagetown
 @onready var player = $%Player
-@onready var current_panel = $%InventoryPanel
+@onready var current_panel = $%GearPanel
 @onready var message_panel = $%MessagePanel
 @onready var inventory_panel = $%InventoryPanel
 @onready var nav_buttons = $%ButtonHBoxContainer
 @onready var skills_panel = $%SkillsPanel
 @onready var entity_panel_slots = $%EntityPanelHFlow
 @onready var inv_manager = $InventoryManager
+@onready var gear_panel = $%GearPanel
 var current_event # Active/current combat encounter or chat
 var message_panel_flash = false
 var counter = 0
@@ -28,7 +29,7 @@ func _ready():
 		i.connect("menu_button_pressed", on_menu_button_pressed)
 		nav_buttons.get_node("ItemsButton").connected_panel = inventory_panel
 		nav_buttons.get_node("SkillsButton").connected_panel = skills_panel
-		nav_buttons.get_node("GearButton").connected_panel = equipment_panel
+		nav_buttons.get_node("GearButton").connected_panel = gear_panel
 	# Instantiate visual slot node for every slot in inventory resource.
 	for slot in player.inventory.slots:
 		var new_slot = load("res://scenes/ItemSlot.tscn").instantiate()

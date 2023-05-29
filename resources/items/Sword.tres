@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://bog77wgjbemph"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bog77wgjbemph"]
 
 [ext_resource type="Script" path="res://resources/item_res.gd" id="1_ttdym"]
 [ext_resource type="Texture2D" uid="uid://dsk1pw4mjf6ts" path="res://images/sword.png" id="2_24nll"]
@@ -8,4 +8,6 @@ resource_local_to_scene = true
 script = ExtResource("1_ttdym")
 item_name = "Sword"
 texture = ExtResource("2_24nll")
-type = "None"
+type = "Equippable"
+equip_type = "Weapon"
+bury_exp = 0

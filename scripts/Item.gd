@@ -46,13 +46,19 @@ func _input(event):
 					drop_button.text = "Drop"
 					drop_button.pressed.connect(drop)
 					new_menu.get_node("PanelContainer/VBoxContainer").add_child(drop_button)
+					# Add an equip button
+					if resource.type == "Equippable":
+						var equip_button = load("res://scenes/RightClickMenuButton.tscn").instantiate()
+						equip_button.text = "Equip"
+						equip_button.pressed.connect(equip)
+						new_menu.get_node("PanelContainer/VBoxContainer").add_child(equip_button)
 				if slot in main.get_node("%NearbyItemsGrid").get_children():
-					# Add a take button and connect its pressed signal to our take function
+					# Add a take button
 					var take_button = load("res://scenes/RightClickMenuButton.tscn").instantiate()
 					take_button.text = "Take"
 					take_button.pressed.connect(take)
 					new_menu.get_node("PanelContainer/VBoxContainer").add_child(take_button)
-				# Add a cancel button and connect its pressed signal to our cancel function
+				# Add a cancel button
 				var cancel_button = load("res://scenes/RightClickMenuButton.tscn").instantiate()
 				cancel_button.text = "Cancel"
 				cancel_button.pressed.connect(cancel)
@@ -60,27 +66,34 @@ func _input(event):
 
 
 func use():
-	if is_instance_valid(main.rc_menu):
-		main.rc_menu.queue_free()
-	if type == "Buriable":
+	close_rc_menu()
+	if resource.type == "Buriable":
 		main.player.inventory.slots[slot.get_index()].item = null
 
 
 func drop():
-	if is_instance_valid(main.rc_menu):
-		main.rc_menu.queue_free()
+	close_rc_menu()
 	inv_manager.add_item(resource, main.player.location.inventory)
 	main.player.inventory.slots[slot.get_index()].item = null
 
 
 func take():
-	if is_instance_valid(main.rc_menu):
-		main.rc_menu.queue_free()
+	close_rc_menu()
 	var item = main.player.location.inventory.slots[slot.get_index()].item
 	main.player.location.inventory.slots[slot.get_index()].item = null
 	inv_manager.add_item(item, main.player.inventory)
 
 
+func equip():
+	close_rc_menu()
+	if resource.equip_type == "Weapon":
+		print('ye')
+
+
 func cancel():
+	close_rc_menu()
+
+
+func close_rc_menu():
 	if is_instance_valid(main.rc_menu):
 		main.rc_menu.queue_free()

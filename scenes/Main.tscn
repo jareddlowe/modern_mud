@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cmgcqgr6rkif4"]
+[gd_scene load_steps=42 format=3 uid="uid://cmgcqgr6rkif4"]
 
 [ext_resource type="PackedScene" uid="uid://du4n31ytwc0jp" path="res://scenes/Villagetown.tscn" id="1_7askw"]
 [ext_resource type="FontFile" uid="uid://4irw0e1a6ev3" path="res://fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf" id="1_cm8g5"]
@@ -21,7 +21,6 @@
 [ext_resource type="Script" path="res://scripts/InventoryManager.gd" id="17_ahktw"]
 [ext_resource type="Script" path="res://scripts/SkillsManager.gd" id="18_ktt1f"]
 [ext_resource type="Script" path="res://scripts/Skill.gd" id="19_cxqy4"]
-[ext_resource type="Script" path="res://scripts/EquipmentManager.gd" id="21_k8fgo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lp5fs"]
 bg_color = Color(0.105882, 0.109804, 0.121569, 1)
@@ -1795,11 +1794,6 @@ script = ExtResource("18_ktt1f")
 
 [node name="Faith" type="Node" parent="SkillsManager"]
 script = ExtResource("19_cxqy4")
-
-[node name="EquipmentManager" type="Control" parent="."]
-visible = false
-layout_mode = 2
-script = ExtResource("21_k8fgo")
 
 [node name="Clicker" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_r7lbd")
